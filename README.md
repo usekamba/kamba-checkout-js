@@ -1,3 +1,5 @@
+# kamba-checkout-js
+Biblioteca para a integração do Checkout Widget na sua página Web
 
 
 Ofereça pagamentos de produtos ou serviços na sua página Web a partir da Internet.
