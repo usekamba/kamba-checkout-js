@@ -1,97 +1,104 @@
 # kamba-checkout-js
-Biblioteca para a integração do Checkout Widget na sua página Web
+
+Integração do Checkout nas páginas Web
 
 
-Ofereça pagamentos de produtos ou serviços na sua página Web a partir da Internet.
 
-Com uma única implementação, seus clientes poderão realizar pagamentos com a sua carteira via código QR de pagamento, além de utilizarem seus dados cadastrados para futuras compras em 2 cliques. Notificação para lembretes de finalização de compra, levantamento da quantia para sua conta bancária em até 72 horas e muito mais benefícios técnicos e de negócios à longo termo.
+Nota: Esta biblioteca está em fase beta e em desenvolvimento contínuo. Se você encontrar algum erro, crie uma issue para que ela seja corrigida o mais rápido possível.
 
-Nota: A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em https://docs.usekamba.com/#autenticacao.
-
-
-Atenção:
-
-O kamba-checkout-js está em fase beta. Para fazer parte desta fase você precisa seguir alguns passos antes:
-
-	•	Enviar um e-mail para suporte@usekamba.com informando um telefone de contato e o e-mail para a sua conta Comerciante.
-	•	Assim que possível, nossa equipa entrará em contato com você para obter mais informações e liberar a funcionalidade para a sua conta Comerciante.
-
-Assim que você implementar o kamba-checkout-js na sua página Web, envie o endereço da sua página Web e até mesmo feedback para a nossa equipa. Nesta fase de implementação a sua opinião é extremamente importante.
+Com uma simples implementação do nosso plugin js e pequenas configurações, permita que seus clientes possam realizar pagamentos dos seus serviços ou produtos na internet com a sua carteira Kamba, torne cada vez mais destacado o seu negócio na internet implementado um pagamento via código QR.
 
 
-Forma atual de pagamento
+Pagamento por código QR
 
-Pagamento via QR com um código de pagamento (muito útil para comerciantes com ponto físico que desejam digitalizar os pagamentos do seu negócio ou para organizadores de eventos para vendas de ingressos, etc, o código pode ser impresso ou enviado para diversos canais sóciais).
+O pagamento via código QR é muito útil para comerciantes com ponto físico que desejam digitalizar os pagamentos do seu negócio ou para organizadores de eventos para vendas de ingressos, etc. O código pode ser impresso ou enviado para diversos canais sociais.
 
 Nota: Você acompanha os estados do pagamento, recebe notificações por e-mail, push quando pagamentos são bem sucedidos.
 
 
 Configuração inicial
 
-Crie uma conta Comerciante com nosco entrando em contato com nossa equipe de suporte. Você receberá uma api_key e outras configurações necessárias para testar a biblioteca no modo SANDBOX.
-
-Nota: Esta biblioteca está em fase beta e em desenvolvimento contínuo. Se você encontrar algum erro, crie uma issue para que ela seja corrigida o mais rápido possível.
+Crie uma conta Comerciante entrando em contato com a nossa equipe de suporte. Você receberá uma chave da nossa API (api_key) e outras configurações necessárias para testar essa implementação no modo SANDBOX.
 
 
-Página do Comerciante
+Página do comerciante
 
-Não há necessidade de clonar o repositório ou baixar arquivos para sua máquina – basta fazer uma chamada para Plugin Javascript na página Web, e adicionar as linhas de código à baixo onde deseja que o botão de pagamento com a Kamba esteja:
+Não há necessidade de clonar o repositório ou baixar arquivos para sua máquina – basta fazer uma chamada para Plugin Javascript na sua página Web, e adicionar pequenas linhas de código no corpo da sua página, observe os passos abaixo:
 
 Passo 1:
 
-Inclua o Plugin Javascript no cabeçalho da página ou no final antes das outras configurações Javascript de acordo com a sua necessidade de carregamento da sua página Web.
+Faça chamada ao Plugin Javascript no cabeçalho da sua página Web ou no corpo da página antes das outras configurações Javascript que poderão ser configuradas:
 
 
 	<head>     
 	      
-	    <script src="https://usekamba/kamba-web-sdk.js"charset="utf-8"></script>
+	    <script src="https://usekamba/kamba-web-sdk.js" charset="utf-8"></script>
 
 	</head>
 
 Passo 2:
 
-Inclua o botão "pagar com Kamba" dentro do corpo da página em qualquer espaço que se pretende que ela seja apresentada. 
+Faça a inclusão do botão "pagar com a Kamba" dentro do corpo da sua página em qualquer lugar onde desejas que ela seja apresentada. 
 
 	<body>
 		
-		<button class="btnOpenWidgetKamba" onclick="start_payment()">Pagar com Kamba</button>
+    	<button class="btnOpenWidgetKamba" onclick="start_payment()"></button>
 
 	</body>
 
 
 Passo 3:
 
-Use as configurações que lhe foram enviada e faça a configuração do produto ou serviço que pretende comercializar com este suporte da Kamba no script a baixo:
+ - Cole o código Javascrip abaixo no corpo da sua página Web, de preferência no final da página.
+	
+	 	<script type="text/javascript">
 
-
-	<script type="text/javascript">
-
-	       function start_payment() {
+	       	function start_payment() {  
 	      
-	        	kamba(initial_config =
-	            { 
-	              channel: 'WEBSITE',
-	              currency: 'AOA',
-	              initial_amount: 10500,
-	              notes: 'Curso API Iniciantes',
-	              redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
-	              payment_method: 'WALLET'
-	            },
-	            api_key = 'Token soaO7K9kcFSbG3n0DHaDFwtt');
+		        kamba(
+		        	initial_config =
+		            { 
+		              channel: 'WEBSITE',
+		              currency: 'AOA',
+		              initial_amount: 10500,
+		              notes: 'Curso API Iniciantes',
+		              redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
+		              payment_method: 'WALLET'
+		            },
+		           
+		            header = 
+		            {
+		              // production || sandbox
+		              enviroment: 'sandbox',
+		              api_key: 'Token soaO7K9kcFSbG3n0DHaDFwtt'
+		            }
+		            );
 
-	      }
+	      	}
+
+	      	styleButtonPayKamba();
+
+	    </script>
+	
 
 
-	      /*
-	      * Você pode personalizar o visual do botão "Pagar com a Kamba" alterando os valores dos * seguintes campos abaixo
-	      */
-	      var btnOpenWidgetKamba = document.querySelector(".btnOpenWidgetKamba");
-	      btnOpenWidgetKamba.style.backgroundImage = 'linear-gradient(to left, #00ff5f, #00FFB3)';
-	      btnOpenWidgetKamba.style.border = 'none';
-	      btnOpenWidgetKamba.style.padding = '1rem';
-	      btnOpenWidgetKamba.style.cursor = 'pointer';
-	      btnOpenWidgetKamba.style.fontSize = '1rem';
-	      btnOpenWidgetKamba.style.borderRadius = '0.3rem';
-	      btnOpenWidgetKamba.style.fontFamily = "'Montserrat', sans-serif";
+ - Configurações Iniciais (initial_config)
 
-	</script>
+		- Substitua o valor do campo "notes" pelo nome do produto ou serviço que desejas comercializar, e coloque o preço do mesmo no valor do campo "initial_amount".
+
+		- O campo "redirect_url_success" serve para receber o endereço da página que está a ser configurada, no entanto subistitua o valor inicial deste campo o endereço da sua página Web.
+
+		- Para o resto dos campos acima as configurações no exemplo são suficientes.
+
+ - Configurações de cabeçalho (header)
+
+		- O campo "enviroment" serve para definir qual ambiente a ser usado, porém neste momento usaremos o ambiente de teste (sandbox).
+
+		- Use a chave da API que lhe será enviada para substituir o valor do campo "api_key".
+
+
+	
+Recomendação: A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em https://docs.usekamba.com/#autenticacao.
+
+
+Nota: Você também pode criar uma issue para deixar o seu feedback ou enviar o seu feedback para a nossa equipa. Nesta fase de implementação a sua opinião é extremamente importante.
