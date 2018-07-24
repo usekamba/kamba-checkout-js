@@ -53,7 +53,8 @@ Faça a inclusão do botão "pagar com a Kamba" dentro do corpo da sua página e
 Passo 3:
 
  - Cole o código Javascrip abaixo no corpo da sua página Web, de preferência no final da página.
-´´´html	
+ 
+´´´javascript
 	 	<script type="text/javascript">
 
 	       	function start_payment() {  
