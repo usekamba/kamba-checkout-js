@@ -20,8 +20,10 @@
 
     
     <!-- Botão para pagamento -->
-    <button class="btnOpenWidgetKamba" onclick="start_payment()">Pagar com a Kamba</button>
-
+    <button class="btnOpenWidgetKamba" onclick="start_payment()"></button>
+    <br>
+    <br>
+    <br>
 
 
     </center>
@@ -44,22 +46,17 @@
               redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
               payment_method: 'WALLET'
             },
-            api_key = 'Token soaO7K9kcFSbG3n0DHaDFwtt');
+           
+            header = 
+            {
+              // production || sandbox
+              enviroment: 'sandbox',
+              api_key: 'Token soaO7K9kcFSbG3n0DHaDFwtt'
+            });
 
       }
 
-
-      /*
-      * Você pode personalizar o visual do botão "Pagar com a Kamba" alterando os valores dos seguintes campos abaixo
-      */
-      var btnOpenWidgetKamba = document.querySelector(".btnOpenWidgetKamba");
-      btnOpenWidgetKamba.style.backgroundImage = 'linear-gradient(to left, #00ff5f, #00FFB3)';
-      btnOpenWidgetKamba.style.border = 'none';
-      btnOpenWidgetKamba.style.padding = '1rem';
-      btnOpenWidgetKamba.style.cursor = 'pointer';
-      btnOpenWidgetKamba.style.fontSize = '1rem';
-      btnOpenWidgetKamba.style.borderRadius = '0.3rem';
-      btnOpenWidgetKamba.style.fontFamily = "'Montserrat', sans-serif";
+      styleButtonPayKamba();
 
     </script>
 
