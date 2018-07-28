@@ -1,6 +1,5 @@
 //Style for button Pay with Kamba - Merchant
-function styleButtonPayKamba()
-{
+
     var btnOpenWidgetKamba = document.querySelector(".btnOpenWidgetKamba");
     btnOpenWidgetKamba.innerHTML = "Pagar com a Kamba";
     var imgButtonKamba = document.createElement("img");
@@ -23,7 +22,6 @@ function styleButtonPayKamba()
     btnOpenWidgetKamba.style.justifyContent = 'center';
     btnOpenWidgetKamba.style.alignItems = 'center';
     btnOpenWidgetKamba.style.boxSizing = 'border-box';
-}
 
 (function () {
 (function bootstrap() {
@@ -44,11 +42,13 @@ function styleButtonPayKamba()
             ready(function(){
 
             //Send - Post request
+            var token = 'Token ';
+
             const url = 'https://kamba-api-staging.herokuapp.com/v1/checkouts/';
                 fetch(url, {method: 'POST',
                     headers: {
                                 'Content-Type': 'application/json',
-                                'authorization': header.api_key,
+                                'authorization': token.concat(header.api_key),
                                 'enviroment': header.enviroment
                             }, 
                     body:  JSON.stringify({
@@ -60,7 +60,19 @@ function styleButtonPayKamba()
                             payment_method: initial_config.payment_method
                         })
 
-                }).then(res => res.json()).then(data => {
+                }).then(function(response) {
+                  if(response.ok) {
+
+                    response.json().then(data => {
+
+                    //To transform
+
+                    var initial_amount = new Number(data.initial_amount);
+                    var total_amount = new Number(data.total_amount);
+
+                    var dateConvert = new Date(data.created_at);
+                    var newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes(), dateConvert.getSeconds()].join(':');
+
 
                     var mainKambaModalContainer = document.createElement("main");
                    
@@ -81,7 +93,8 @@ function styleButtonPayKamba()
                     kambaModalContainer.style.paddingRight = '1rem';
                     kambaModalContainer.style.overflow = 'auto';
 
-                     //Template
+
+                    //Template
                     const kambaWidget = `
 
                     <div class="kambaModalWidget">
@@ -108,7 +121,7 @@ function styleButtonPayKamba()
 
                                         <div class="textQr">
                                             <div class="textValidate">
-                                                Válido até: ${data.created_at}
+                                                Válido até: ${newDateConvert}
                                             </div>
                                         </div>
                                     </div>
@@ -127,13 +140,13 @@ function styleButtonPayKamba()
                                         <h3>Detalhes do pagamento</h3>
 
                                         <ul class="listProprietyProduct">
-                                            <li class="nameProduct"><b>${data.notes}</b></li>
-                                            <li class="priceProduct"><b>kz ${data.initial_amount}</b></li>
+                                            <li class="nameProduct"><b> ${data.notes} </b></li>
+                                            <li class="priceProduct"><b>${initial_amount.toLocaleString('pt-br', {style: 'currency', currency: 'AKZ'})} </b></li>
                                         </ul>
 
                                         <ul class="listTotal">
                                             <li class="descriptionTotal"><b>TOTAL</b></li>
-                                            <li class="priceTotal"><b>kz ${data.total_amount}</b></li>
+                                            <li class="priceTotal"><b>${total_amount.toLocaleString('pt-br', {style: 'currency', currency: 'AKZ'})} </b></li>
                                         </ul>
                                     </div>
 
@@ -144,7 +157,7 @@ function styleButtonPayKamba()
                             <article>
 
                                 <div  class="descriptionKamba">
-                                    <div class="descritionKambaMerchant">Você está a pagar <b>${data.merchant.business_name}</b>
+                                    <div class="descritionKambaMerchant">Você está a pagar <b> ${data.merchant.business_name} </b>
                                     </div>
                                     
                                     <div class="btnCloseWidgetKamba">
@@ -347,9 +360,93 @@ function styleButtonPayKamba()
 
                     var x = window.matchMedia("(min-width: 1025PX)")
                     midiaLargeDivice(x)
-                    x.addListener(midiaLargeDivice)  
+                    x.addListener(midiaLargeDivice)
 
+                    });
+
+                  } else {
+                    //console.log('Network response was not ok.');
+
+                    response.json().then(data => {
+
+                      templateModalErrorPayKamba();
+
+                      var textErrorKamba = document.querySelector(".textErrorKamba");
+                      textErrorKamba.innerHTML = "Falha!... Verifique suas configurações de pagamento ou entra em contacto com a equipe da Kamba";
+                      
+                    });
+
+                  }
                 })
+                .catch(function(error) {
+        
+                  templateModalErrorPayKamba();
+
+                  var textErrorKamba = document.querySelector(".textErrorKamba");
+                  textErrorKamba.innerHTML = "Falha!... Verifique sua conexão com a internet, ela pode estar muito lenta";
+                });
+               
+
+
+               function templateModalErrorPayKamba(){
+                   var mainKambaModalContainer = document.createElement("main");
+                   
+                    //Modal Container
+                    var kambaModalContainer = document.getElementsByTagName("body")[0].appendChild(mainKambaModalContainer);
+                    kambaModalContainer.classList.add("kambaModalContainer");
+                    kambaModalContainer.style.width = '100vw';
+                    kambaModalContainer.style.height = '100%';
+                    kambaModalContainer.style.background = 'rgba(0,0,0,.4)';
+                    kambaModalContainer.style.position = 'fixed';
+                    kambaModalContainer.style.top = '0';
+                    kambaModalContainer.style.left = '0';
+                    kambaModalContainer.style.zIndex = '1000000000000000000000';
+                    kambaModalContainer.style.display = 'flex';
+                    kambaModalContainer.style.justifyContent = 'center';
+                    kambaModalContainer.style.alignItems = 'center';
+                    kambaModalContainer.style.boxSizing = 'border-box';
+                    kambaModalContainer.style.paddingRight = '1rem';
+                    kambaModalContainer.style.overflow = 'auto';
+                    kambaModalContainer.style.cursor = 'pointer';
+
+                    kambaModalContainer.addEventListener('click', function(){
+                    kambaModalContainer.style.display = 'none';
+                    });
+
+                    //Button for Pay Kamba
+                    document.querySelector(".btnOpenWidgetKamba").onclick = function(){
+                        kambaModalContainer.style.display = 'flex';
+                    };
+
+                    //Template
+                    const kambaWidget = `
+
+                    <div class="kambaModalWidget">
+                        <section> 
+                                <p class="textErrorKamba"></p>
+                        </section>
+                    </div>`
+                    kambaModalContainer.innerHTML = kambaWidget;
+
+                    //Style Widget Modal
+                    var kambaModalWidget = document.querySelector("main .kambaModalWidget");
+                    kambaModalWidget.style.borderRadius = '0.2rem';
+                    kambaModalWidget.style.overflow = 'auto';
+                    kambaModalWidget.style.background = '#fff';
+                    kambaModalWidget.style.width = '40%';
+                    kambaModalWidget.style.height = '30%';
+                    kambaModalWidget.style.position = 'absolute';
+                    kambaModalWidget.style.fontFamily = "'Montserrat', sans-serif";
+                    kambaModalWidget.style.fontSize = '0.95rem';
+                    kambaModalWidget.style.boxShadow = '0 5px 8px 0 rgba(0,0,0,.2), 0 7px 20px 0 rgba(0,0,0,.10)';
+                    kambaModalWidget.style.display = 'flex';
+                    kambaModalWidget.style.justifyContent = 'center';
+                    kambaModalWidget.style.alignItems = 'center';
+                    kambaModalWidget.style.boxSizing = 'border-box';
+                    kambaModalWidget.style.padding = '1rem';
+                    kambaModalWidget.style.color = 'red';
+                
+               }             
 
             })  
         }
