@@ -3,6 +3,9 @@
     <head>
       <title>Widget Kamba</title>
       <meta charset="utf-8">
+
+       <!-- Chamada para o SDK versão Web Kamba -->
+    <script src="kamba-web-sdk.js" charset="utf-8"></script>
       
     </head>
 
@@ -23,8 +26,7 @@
 
     </center>
 
-    <!-- Chamada para o SDK versão Web Kamba -->
-    <script src="kamba-web-sdk.js" charset="utf-8"></script>
+   
 
     <script type="text/javascript">
 
@@ -33,23 +35,23 @@
       //Configurações do comerciante
       
         kamba(
-            initial_config =
-            { 
-              channel: 'WEBSITE',
-              currency: 'AOA',
-              initial_amount: 10500,
-              notes: 'Curso API Iniciantes',
-              redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
-              payment_method: 'WALLET'
-            },
-           
-            header = 
-            {
-              // production || sandbox
-              enviroment: 'sandbox',
-              api_key: 'soaO7K9kcFSbG3n0DHaDFwtt'
-            }
-            );
+              initial_config =
+              { 
+                channel: 'WEBSITE',
+                currency: 'AOA',
+                initial_amount: 10500,
+                notes: 'Curso API Iniciantes',
+                redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
+                payment_method: 'WALLET'
+              },
+             
+              secondary_config = 
+              {
+                // production || sandbox
+                enviroment: 'sandbox',
+                api_key: 'uma9Acnj51ZHutRenl45vwtt'
+              }
+              );
 
       }
 

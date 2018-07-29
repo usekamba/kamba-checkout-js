@@ -32,11 +32,11 @@ Passo 1:
 Faça chamada ao Plugin Javascript no cabeçalho da sua página Web ou no corpo da página antes das outras configurações Javascript que poderão ser configuradas:
 
 ```html
-	<head>     
+	<body>     
 	      
 	    <script src="https://usekamba/kamba-web-sdk.js" charset="utf-8"></script>
 
-	</head>
+	</body>
 ```
 Passo 2:
 
@@ -54,35 +54,33 @@ Passo 3:
 
  - Cole o código Javascrip abaixo no corpo da sua página Web, de preferência no final da página.
 
-```
+```html
 	 	<script type="text/javascript">
 
-	       	function start_payment() {  
+	       function start_payment() {
 	      
 		        kamba(
-		        	initial_config =
-		            { 
-		              channel: 'WEBSITE',
-		              currency: 'AOA',
-		              initial_amount: 10500,
-		              notes: 'Curso API Iniciantes',
-		              redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
-		              payment_method: 'WALLET'
-		            },
-		           
-		            header = 
-		            {
-		              // production || sandbox
-		              enviroment: 'sandbox',
-		              api_key: 'Token soaO7K9kcFSbG3n0DHaDFwtt'
-		            }
-		            );
+		              initial_config =
+		              { 
+		                channel: 'WEBSITE',
+		                currency: 'AOA',
+		                initial_amount: 10500,
+		                notes: 'Curso API Iniciantes',
+		                redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
+		                payment_method: 'WALLET'
+		              },
+		             
+		              secondary_config = 
+		              {
+		                // production || sandbox
+		                enviroment: 'sandbox',
+		                api_key: 'uma9Acnj51ZHutRenl45vwtt'
+		              }
+		              );
 
-	      	}
+	      }
 
-	      	styleButtonPayKamba();
-
-	    </script>
+    </script>
 	
 ```
 
@@ -94,7 +92,7 @@ Passo 3:
 
 		- Para o resto dos campos acima as configurações no exemplo são suficientes.
 
- - Configurações de cabeçalho (header)
+ - Configurações secundárias (secondary_config)
 
 		- O campo "enviroment" serve para definir qual ambiente a ser usado, porém neste momento usaremos o ambiente de teste (sandbox).
 

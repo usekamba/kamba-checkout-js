@@ -1,5 +1,14 @@
-//Style for button Pay with Kamba - Merchant
+function ready (fn)
+{
+    if (document.readyState != 'loading') {
+        fn();
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
 
+ready(function(){
+    //Style for button Pay with Kamba - Merchant
     var btnOpenWidgetKamba = document.querySelector(".btnOpenWidgetKamba");
     btnOpenWidgetKamba.innerHTML = "Pagar com a Kamba";
     var imgButtonKamba = document.createElement("img");
@@ -23,13 +32,17 @@
     btnOpenWidgetKamba.style.alignItems = 'center';
     btnOpenWidgetKamba.style.boxSizing = 'border-box';
 
+});
+
+
+
 (function () {
 (function bootstrap() {
         'use strict'
 
         window.KAMBA = window.KAMBA || {};
 
-        window.kamba = function kamba(initial_config, header) {
+        window.kamba = function kamba(initial_config, secondary_config) {
 
             function ready (fn){
                 if (document.readyState != 'loading') {
@@ -40,16 +53,21 @@
             }
 
             ready(function(){
+                //Send - Post request
 
-            //Send - Post request
-            var token = 'Token ';
+                let url;
+                let token = 'Token ';
 
-            const url = 'https://kamba-api-staging.herokuapp.com/v1/checkouts/';
+                if (secondary_config.enviroment == 'sandbox'){
+                    url = "https://sandbox.usekamba.com/v1/checkouts/";
+                }else{
+                    url = "https://api.usekamba.com/v1/checkouts/";
+                }
+
                 fetch(url, {method: 'POST',
                     headers: {
                                 'Content-Type': 'application/json',
-                                'authorization': token.concat(header.api_key),
-                                'enviroment': header.enviroment
+                                'authorization': token.concat(secondary_config.api_key)
                             }, 
                     body:  JSON.stringify({
                             channel: initial_config.channel,
