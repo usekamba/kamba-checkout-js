@@ -52,9 +52,10 @@ Faça a inclusão do botão "pagar com a Kamba" dentro do corpo da sua página e
 
 Passo 3:
 
- - Cole o código Javascrip abaixo no corpo da sua página Web, de preferência no final da página.
+ - Cole o código Javascrip abaixo dentro da tag "body" no corpo da sua página Web, de preferência no final da página.
 
 ```html
+	 <body>
 	 	<script type="text/javascript">
 
 	       function start_payment() {
@@ -63,7 +64,7 @@ Passo 3:
 		              initial_config =
 		              { 
 		                channel: 'WEBSITE',
-		                currency: 'AOA',
+		                currency: 'AkZ',
 		                initial_amount: 10500,
 		                notes: 'Curso API Iniciantes',
 		                redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
@@ -72,35 +73,47 @@ Passo 3:
 		             
 		              secondary_config = 
 		              {
-		                // production || sandbox
-		                enviroment: 'sandbox',
-		                api_key: 'uma9Acnj51ZHutRenl45vwtt'
+		                environment: 'sandbox',
+		                api_key: 'SUA_CHAVE_DA_API'
 		              }
 		              );
+		      }
 
-	      }
-
-    </script>
+	    </script>
+	</body>
 	
 ```
 
  - Configurações Iniciais (initial_config)
 
+ 		- O campo "currency" recebe a moeda em que se pretende fazer a venda. Utilize o seu valor para descrever a moeda que pretende comercializar seu produto ou serviço.
+
 		- Substitua o valor do campo "notes" pelo nome do produto ou serviço que desejas comercializar, e coloque o preço do mesmo no valor do campo "initial_amount".
 
-		- O campo "redirect_url_success" serve para receber o endereço da página que está a ser configurada, no entanto subistitua o valor inicial deste campo o endereço da sua página Web.
+		- O campo "redirect_url_success" serve para receber o endereço da página que está a ser configurada, no entanto substitua o valor inicial deste campo o endereço da sua página Web.
 
 		- Para o resto dos campos acima as configurações no exemplo são suficientes.
 
  - Configurações secundárias (secondary_config)
 
-		- O campo "enviroment" serve para definir qual ambiente a ser usado, porém neste momento usaremos o ambiente de teste (sandbox).
+		- O campo "environment" define qual ambiente poderá ser usado. Que podem ser:
+
+		 	- Ambiente de teste (sandbox).
+		 	- Ambiente de produção (production).
+
+		 	Nota: Porém neste momento usaremos o ambiente de teste (sandbox).
 
 		- Use a chave da API que lhe será enviada para substituir o valor do campo "api_key".
 
 
 	
-> Recomendação: A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em https://docs.usekamba.com/#autenticacao.
+## Recomendações
+
+	> A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em https://docs.usekamba.com/#autenticacao.
+
+	> Por questões de segurança, para não deixar que a sua chave de API (api_key) esteja ao alcance de qualquer pessoa recomendamos que passe a sua chave utilizando as variáveis de ambiente.
+
+	> Por este período de testes recomendamos a utilização dos navegadores Google Chrome e Mozilla Firefox (Versões actualizadas).
 
 
 > Nota: Você também pode criar uma issue para deixar o seu feedback ou enviar o seu feedback para a nossa equipa. Nesta fase de implementação a sua opinião é extremamente importante.

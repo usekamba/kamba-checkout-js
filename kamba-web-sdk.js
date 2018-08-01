@@ -58,7 +58,7 @@ ready(function(){
                 let url;
                 let token = 'Token ';
 
-                if (secondary_config.enviroment == 'sandbox'){
+                if (secondary_config.environment == 'sandbox'){
                     url = "https://sandbox.usekamba.com/v1/checkouts/";
                 }else{
                     url = "https://api.usekamba.com/v1/checkouts/";
@@ -159,12 +159,12 @@ ready(function(){
 
                                         <ul class="listProprietyProduct">
                                             <li class="nameProduct"><b> ${data.notes} </b></li>
-                                            <li class="priceProduct"><b>${initial_amount.toLocaleString('pt-br', {style: 'currency', currency: 'AKZ'})} </b></li>
+                                            <li class="priceProduct"><b>${initial_amount.toLocaleString('pt-ao', {style: 'currency', currency: initial_config.currency})} </b></li>
                                         </ul>
 
                                         <ul class="listTotal">
                                             <li class="descriptionTotal"><b>TOTAL</b></li>
-                                            <li class="priceTotal"><b>${total_amount.toLocaleString('pt-br', {style: 'currency', currency: 'AKZ'})} </b></li>
+                                            <li class="priceTotal"><b>${total_amount.toLocaleString('pt-ao', {style: 'currency', currency: initial_config.currency})} </b></li>
                                         </ul>
                                     </div>
 
@@ -383,7 +383,6 @@ ready(function(){
                     });
 
                   } else {
-                    //console.log('Network response was not ok.');
 
                     response.json().then(data => {
 
