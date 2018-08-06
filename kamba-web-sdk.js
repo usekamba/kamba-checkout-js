@@ -34,8 +34,6 @@ ready(function(){
 
 });
 
-
-
 (function () {
 (function bootstrap() {
         'use strict'
@@ -91,6 +89,9 @@ ready(function(){
                     var dateConvert = new Date(data.created_at);
                     var newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes(), dateConvert.getSeconds()].join(':');
 
+                    var convertQrCode = data.qr_code.html;
+
+                    console.log(convertQrCode);
 
                     var mainKambaModalContainer = document.createElement("main");
                    
@@ -99,7 +100,7 @@ ready(function(){
                     kambaModalContainer.classList.add("kambaModalContainer");
                     kambaModalContainer.style.width = '100vw';
                     kambaModalContainer.style.height = '100%';
-                    kambaModalContainer.style.background = 'rgba(0,0,0,.4)';
+                    kambaModalContainer.style.background = 'rgba(0,0,0,.25)';
                     kambaModalContainer.style.position = 'fixed';
                     kambaModalContainer.style.top = '0';
                     kambaModalContainer.style.left = '0';
@@ -118,9 +119,10 @@ ready(function(){
                     <div class="kambaModalWidget">
 
                         <header class="checkoutHeader">
-                             
-                            <img src="images/KambaLogoGreen-kamba.png" class="imgLogoKamba"> 
 
+                            <div class="securityPay">
+                                        <a href="#" class="textSecurityPay"><img src="images/icons8-lock-kamba.png" class="lock"> <span class="ps"> Pagamento seguro</span></a>
+                                    </div>
                         </header>
                      
                         <section>
@@ -132,16 +134,16 @@ ready(function(){
                                     <div class="detailQr">
                                         
                                         <div class="divSvg">
-                                            <svg class="imgQr">
-                                                ${data.qr_code.svg}
+                                        
+                                            <svg viewBox="0 0 625 625" preserveAspectRatio="xMidYMid meet" class="imgQr">
+                                                    ${data.qr_code.svg}
                                             </svg>
-                                        </div>
 
-                                        <div class="textQr">
-                                            <div class="textValidate">
-                                                Válido até: ${newDateConvert}
+                                             <div class="textValidate">
+                                                Válido até ${newDateConvert}
                                             </div>
                                         </div>
+
                                     </div>
                              
                                 
@@ -149,13 +151,8 @@ ready(function(){
 
                                 
                                 <div class="partDetailPay">
-                                    <div class="securityPay">
-                                        <a href="#" class="textSecurityPay"><img src="images/icons8-lock-kamba.png" class="lock"> <span class="ps"> Pagamento seguro</span></a>
-                                    </div>
-
-
+                
                                     <div class="payDetail">
-                                        <h3>Detalhes do pagamento</h3>
 
                                         <ul class="listProprietyProduct">
                                             <li class="nameProduct"><b> ${data.notes} </b></li>
@@ -175,16 +172,31 @@ ready(function(){
                             <article>
 
                                 <div  class="descriptionKamba">
-                                    <div class="descritionKambaMerchant">Você está a pagar <b> ${data.merchant.business_name} </b>
+
+                                    <div class="helpKamba">
+
+                                        <div class="optionHelpKamba1">
+                                            - Abra o App em seu telefone e escaneie o código
+                                        </div>
+                                        <div class="optionHelpKamba2">
+                                            - Como faço para digitalizar o código?
+                                        </div>
+                                        <div class="optionHelpKamba3">- Não tem uma conta Kamba? <a href="#" class="appLinkKamba"> Baixe o App</a>
+                                        </div>
+
                                     </div>
-                                    
-                                    <div class="btnCloseWidgetKamba">
-                                        Fechar
-                                    </div> 
                                     
                                 </div>
              
                             </article>
+                            <footer class="footerKamba">
+                                <div class="descritionKambaMerchant">Pagar <b> ${data.merchant.business_name} </b>
+                                </div>
+                                    
+                                <div class="btnCloseWidgetKamba">
+                                    Fechar
+                                </div> 
+                            </footer>
 
                         </section>
                     </div>`
@@ -199,68 +211,24 @@ ready(function(){
                     kambaModalWidget.style.height = '100%';
                     kambaModalWidget.style.position = 'absolute';
                     kambaModalWidget.style.fontFamily = "'Montserrat', sans-serif";
-                    kambaModalWidget.style.fontSize = '0.95rem';
+                    kambaModalWidget.style.fontSize = '0.85rem';
                     kambaModalWidget.style.boxShadow = '0 5px 8px 0 rgba(0,0,0,.2), 0 7px 20px 0 rgba(0,0,0,.10)';
 
                     //Header
                     var checkoutHeader = document.querySelector(".checkoutHeader");
                     checkoutHeader.style.padding = '1rem 0 0 1rem';
-
-                    var imgLogoKamba = document.querySelector(".imgLogoKamba");
-                    imgLogoKamba.style.float = 'left';
-                    imgLogoKamba.style.width = '7%';
                 
                     //Body
                     var headerWidget = document.querySelector(".headerWidget");
                     headerWidget.style.width = '100%';
                     headerWidget.style.float = 'left';
-                    headerWidget.style.boxShadow = '0px 0px 1px #7f7f7f';
                     headerWidget.style.marginTop = '1rem';
                     headerWidget.style.background = 'white';
 
-                    var qrPart = document.querySelector(".qrPart");
-                    qrPart.style.width = '100%';
-                    qrPart.style.background = "#00ff5f";
-                    qrPart.style.position = 'relative';
-                    qrPart.style.float = 'left';
-
-                    var detailQr = document.querySelector(".detailQr");
-                    detailQr.style.width = '100%';
-                    detailQr.style.float = 'left';
-                    detailQr.style.background = 'white';
-                    detailQr.style.boxSizing = 'border-box';
-
-                    var divSvg = document.querySelector(".divSvg");
-                    divSvg.style.textAlign = 'center';
-                    divSvg.style.padding = '1rem';
-                    divSvg.style.width = '90%';
-                    divSvg.style.height = '12rem';
-
-                    var imgQr = document.querySelector(".imgQr");
-                    imgQr.style.width = '100%';
-                    imgQr.style.height = '100%';
-
-                    var textQr = document.querySelector(".textQr");
-                    textQr.style.width = '100%';
-                    textQr.style.background = 'white';
-                    textQr.style.float = 'left';
-                    textQr.style.padding = '0 0 1rem 0';
-                    textQr.style.boxSizing = 'border-box';
-
-                    var textValidate = document.querySelector(".textValidate");
-                    textValidate.style.textAlign = 'center';
-                    textValidate.style.fontSize = '0.8rem';
-
-                    //Pay Detail
-                    var partDetailPay = document.querySelector(".partDetailPay");
-                    partDetailPay.style.width = '100%';
-                    partDetailPay.style.float = 'left';
-                    partDetailPay.style.background = 'white';
 
                     var securityPay = document.querySelector(".securityPay");
                     securityPay.style.marginRight = '1rem';
                     securityPay.style.float = 'right';
-                    securityPay.style.marginTop = '1.5rem';
 
                     var textSecurityPay = document.querySelector(".textSecurityPay");
                     textSecurityPay.style.textDecoration = 'none';
@@ -274,14 +242,48 @@ ready(function(){
                     ps.style.color = '#666666';
                     ps.fontSize = '0.8rem';
 
+                    var qrPart = document.querySelector(".qrPart");
+                    qrPart.style.width = '100%';
+                    qrPart.style.background = "#00ff5f";
+                    qrPart.style.position = 'relative';
+
+                    var detailQr = document.querySelector(".detailQr");
+                    detailQr.style.width = '90%';
+                    detailQr.style.float = 'left';
+                    detailQr.style.background = 'white';
+                    detailQr.style.boxSizing = 'border-box';
+                    detailQr.style.textAlign = 'center';
+
+                    var divSvg = document.querySelector(".divSvg");
+                    divSvg.style.textAlign = 'center';
+                    divSvg.style.padding = '0 1rem 1rem 1rem';
+                    divSvg.style.width = '100%';
+
+                    var imgQr = document.querySelector(".imgQr");
+                    imgQr.style.width = '50%';
+                    imgQr.style.height = '50%';
+                    imgQr.style.textAlign = 'center';
+                    imgQr.style.boxShadow = '0px 0px 5px #7f7f7f';
+                    imgQr.style.padding = '0.5rem';
+                    imgQr.style.borderRadius = '0.3rem';
+
+                    var textValidate = document.querySelector(".textValidate");
+                    textValidate.style.textAlign = 'center';
+                    textValidate.style.fontSize = '0.72rem';
+                    textValidate.style.marginTop = '1rem';
+                    textValidate.style.float = 'left';
+                    textValidate.style.width = '100%';
+
+                    //Pay Detail
+                    var partDetailPay = document.querySelector(".partDetailPay");
+                    partDetailPay.style.width = '100%';
+                    partDetailPay.style.float = 'left';
+                    partDetailPay.style.background = 'white';
+
                     var payDetail = document.querySelector(".payDetail");
                     payDetail.style.width = '92%';
                     payDetail.style.float = 'left';
-                    payDetail.style.margin = '1rem';
-
-                    var payDetailH3 = document.querySelector(".payDetail h3");
-                    payDetailH3.style.color = '#7C7979';
-                    payDetailH3.style.fontSize = '1rem';
+                    payDetail.style.margin = '1rem 1rem 0 1rem';
 
                     var listProprietyProduct = document.querySelector(".listProprietyProduct");
                     listProprietyProduct.style.width = '100%';
@@ -290,7 +292,6 @@ ready(function(){
                     listProprietyProduct.style.marginLeft = '0';
                     listProprietyProduct.style.paddingLeft = '0';
                     listProprietyProduct.style.background = 'white';
-                    listProprietyProduct.style.borderTop = '1px solid #f4f0f0';
 
                     var nameProduct = document.querySelector(".nameProduct");
                     nameProduct.style.float = 'left';
@@ -305,7 +306,8 @@ ready(function(){
                     listTotal.style.marginLeft = '0';
                     listTotal.style.paddingLeft = '0';
                     listTotal.style.background = 'white';
-                    listTotal.style.borderTop = '1px solid #f4f0f0';
+                    listTotal.style.borderBottom = '1px solid #D2CFCF';
+                    listTotal.style.paddingBottom = '0.1rem';
 
                     var descriptionTotal = document.querySelector(".descriptionTotal");
                     descriptionTotal.style.float = 'left';
@@ -315,21 +317,43 @@ ready(function(){
 
                     var descriptionKamba = document.querySelector(".descriptionKamba");
                     descriptionKamba.style.width = '90%';
-                    descriptionKamba.style.padding = '1rem';
-                    descriptionKamba.style.float = 'left';
+                    descriptionKamba.style.padding = '0 1rem';
                     descriptionKamba.style.textAlign = 'center';
 
+                    var helpKamba = document.querySelector(".helpKamba");
+                    helpKamba.style.textAlign = 'center';
+
+                    var optionHelpKamba1 = document.querySelector(".optionHelpKamba1");
+                    optionHelpKamba1.style.marginTop = '0.5rem';
+
+                    var optionHelpKamba2 = document.querySelector(".optionHelpKamba2");
+                    optionHelpKamba2.style.marginTop = '0.8rem';
+
+                    var optionHelpKamba3 = document.querySelector(".optionHelpKamba3");
+                    optionHelpKamba3.style.marginTop = '0.8rem';
+
+                    var appLinkKamba = document.querySelector(".appLinkKamba");
+                    appLinkKamba.style.textDecoration = 'none';
+                    appLinkKamba.style.color = '#0099ff';
+
+                    var footerKamba = document.querySelector(".footerKamba");
+                    footerKamba.style.width = '90%';
+                    footerKamba.style.float = 'left';
+                    footerKamba.style.padding = '0 1rem';
+
                     var descritionKambaMerchant = document.querySelector(".descritionKambaMerchant");
+                    descritionKambaMerchant.style.marginTop = '1.7rem';
+                    descritionKambaMerchant.style.float = 'left';
 
                     var btnCloseWidgetKamba = document.querySelector(".btnCloseWidgetKamba");
                     btnCloseWidgetKamba.title = 'Sair do pagamento';
                     btnCloseWidgetKamba.style.border = 'none';
                     btnCloseWidgetKamba.style.cursor = 'pointer';
                     btnCloseWidgetKamba.style.fontSize = '1rem';
-                    btnCloseWidgetKamba.style.boxSizing = 'border-box';
                     btnCloseWidgetKamba.style.borderRadius = '0.3rem';
                     btnCloseWidgetKamba.style.float = 'right';
                     btnCloseWidgetKamba.style.color = 'red';
+                    btnCloseWidgetKamba.style.paddingTop = '1.5rem';
 
                     btnCloseWidgetKamba.onclick = function(){
                         kambaModalContainer.style.display = 'none';
@@ -342,43 +366,21 @@ ready(function(){
 
                     //Function Midia Query
 
-                    //MEDIUM
+                    //MEDIUM and LARGE
                     function midiaMediumDivice(x) {
                         if (x.matches) { 
-                             kambaModalWidget.style.width = '85%';
-                             kambaModalWidget.style.height = '62%';
-                             qrPart.style.width = '50%';
-                             partDetailPay.style.width = '48%';
-                             qrPart.style.float = 'left';
+                             kambaModalWidget.style.width = '360px';
+                             kambaModalWidget.style.height = '490px';
+                             partDetailPay.style.width = '100%';
                              partDetailPay.style.float = 'left';
                              descritionKambaMerchant.style.float = 'left';
-                             imgLogoKamba.style.width = '4%';
-                             descriptionKamba.style.width = '94%';
+                             descriptionKamba.style.width = '91%';
                         }
                     }
 
                     var x = window.matchMedia("(min-width: 641px)")
                     midiaMediumDivice(x)
                     x.addListener(midiaMediumDivice)
-
-                    //LARGE
-                    function midiaLargeDivice(x) {
-                        if (x.matches) {   
-                            kambaModalWidget.style.width = '57%';
-                            kambaModalWidget.style.height = '62%';
-                            qrPart.style.width = '50%';
-                            partDetailPay.style.width = '48%';
-                            qrPart.style.float = 'left';
-                            partDetailPay.style.float = 'left';  
-                            descritionKambaMerchant.style.float = 'left';
-                            imgLogoKamba.style.width = '4%';
-                            descriptionKamba.style.width = '94%';
-                        } 
-                    }
-
-                    var x = window.matchMedia("(min-width: 1025PX)")
-                    midiaLargeDivice(x)
-                    x.addListener(midiaLargeDivice)
 
                     });
 
@@ -450,8 +452,8 @@ ready(function(){
                     kambaModalWidget.style.borderRadius = '0.2rem';
                     kambaModalWidget.style.overflow = 'auto';
                     kambaModalWidget.style.background = '#fff';
-                    kambaModalWidget.style.width = '40%';
-                    kambaModalWidget.style.height = '30%';
+                    kambaModalWidget.style.width = '65%';
+                    kambaModalWidget.style.height = '35%';
                     kambaModalWidget.style.position = 'absolute';
                     kambaModalWidget.style.fontFamily = "'Montserrat', sans-serif";
                     kambaModalWidget.style.fontSize = '0.95rem';
@@ -460,8 +462,37 @@ ready(function(){
                     kambaModalWidget.style.justifyContent = 'center';
                     kambaModalWidget.style.alignItems = 'center';
                     kambaModalWidget.style.boxSizing = 'border-box';
-                    kambaModalWidget.style.padding = '1rem';
+                    kambaModalWidget.style.textAlign = 'center';
+                    kambaModalWidget.style.padding = '1.5rem';
                     kambaModalWidget.style.color = 'red';
+
+
+
+                    //MEDIUM
+                    function midiaMediumDivice(x) {
+                        if (x.matches) { 
+                             kambaModalWidget.style.width = '40%';
+                             kambaModalWidget.style.height = '30%';
+                            
+                        }
+                    }
+
+                    var x = window.matchMedia("(min-width: 641px)")
+                    midiaMediumDivice(x)
+                    x.addListener(midiaMediumDivice)
+
+                    //LARGE
+                    function midiaLargeDivice(x) {
+                        if (x.matches) {   
+                            kambaModalWidget.style.width = '25%';
+                            kambaModalWidget.style.height = '30%';
+                
+                        } 
+                    }
+
+                    var x = window.matchMedia("(min-width: 1025PX)")
+                    midiaLargeDivice(x)
+                    x.addListener(midiaLargeDivice)
                 
                }             
 

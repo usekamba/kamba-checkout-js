@@ -32,11 +32,11 @@ Passo 1:
 Faça chamada ao Plugin Javascript no cabeçalho da sua página Web ou no corpo da página antes das outras configurações Javascript que poderão ser configuradas:
 
 ```html
-	<body>     
+	<head>     
 	      
-	    <script src="https://usekamba/kamba-web-sdk.js" charset="utf-8"></script>
+	    <script src="https://cdn.rawgit.com/usekamba/sandbox-kamba-checkout-js/master/kamba-checkout.js" charset="utf-8"></script>
 
-	</body>
+	</head>
 ```
 Passo 2:
 
@@ -45,7 +45,7 @@ Faça a inclusão do botão "pagar com a Kamba" dentro do corpo da sua página e
 ```html
 	<body>
 		
-    	<button class="btnOpenWidgetKamba" onclick="start_payment()"></button>
+    		<button class="btnOpenWidgetKamba" onclick="start_payment()"></button>
 
 	</body>
 ```
@@ -55,29 +55,29 @@ Passo 3:
  - Cole o código Javascrip abaixo dentro da tag "body" no corpo da sua página Web, de preferência no final da página.
 
 ```html
-	 <body>
+	<body>
 	 	<script type="text/javascript">
 
-	       function start_payment() {
-	      
-		        kamba(
-		              initial_config =
-		              { 
-		                channel: 'WEBSITE',
-		                currency: 'AkZ',
-		                initial_amount: 10500,
-		                notes: 'Curso API Iniciantes',
-		                redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
-		                payment_method: 'WALLET'
-		              },
-		             
-		              secondary_config = 
-		              {
-		                environment: 'sandbox',
-		                api_key: 'SUA_CHAVE_DA_API'
-		              }
-		              );
-		      }
+		       	function start_payment() {
+		      
+			        kamba(
+			              initial_config =
+			              { 
+			                channel: 'WEBSITE',
+			                currency: 'AkZ',
+			                initial_amount: 10500,
+			                notes: 'Curso API Iniciantes',
+			                redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
+			                payment_method: 'WALLET'
+			              },
+			             
+			              secondary_config = 
+			              {
+			                environment: 'sandbox',
+			                api_key: 'SUA_CHAVE_DA_API'
+			              }
+			              );
+			    }
 
 	    </script>
 	</body>
@@ -86,7 +86,7 @@ Passo 3:
 
  - Configurações Iniciais (initial_config)
 
- 		- O campo "currency" recebe a moeda em que se pretende fazer a venda. Utilize o seu valor para descrever a moeda que pretende comercializar seu produto ou serviço.
+ 		- O campo "currency" recebe tipo de moeda em que se pretende utilizar. O valor "AKZ" pode ser substituido por outros correspondentes de moeda.
 
 		- Substitua o valor do campo "notes" pelo nome do produto ou serviço que desejas comercializar, e coloque o preço do mesmo no valor do campo "initial_amount".
 
@@ -111,7 +111,7 @@ Passo 3:
 
 	> A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em https://docs.usekamba.com/#autenticacao.
 
-	> Por questões de segurança, para não deixar que a sua chave de API (api_key) esteja ao alcance de qualquer pessoa recomendamos que passe a sua chave utilizando as variáveis de ambiente.
+	> Por questões de segurança, para não deixar que a sua chave de API (api_key) esteja ao alcance de qualquer pessoa que acesse a sua página Web recomendamos que estabeleça a sua chave da API utilizando as variáveis de ambiente. Podendo utilizar algo como ENV["API_KEY"] no valor da chave da API e passar a verdadeira chave da API por meio de uma variável de ambiente.
 
 	> Por este período de testes recomendamos a utilização dos navegadores Google Chrome e Mozilla Firefox (Versões actualizadas).
 
