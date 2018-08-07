@@ -121,7 +121,7 @@ ready(function(){
                         <header class="checkoutHeader">
 
                             <div class="securityPay">
-                                        <a href="#" class="textSecurityPay"><img src="images/icons8-lock-kamba.png" class="lock"> <span class="ps"> Pagamento seguro</span></a>
+                                        <div class="textSecurityPay"><img src="images/icons8-lock-kamba.png" class="lock"> <span class="ps"> Pagamento seguro</span></div>
                                     </div>
                         </header>
                      
@@ -176,12 +176,10 @@ ready(function(){
                                     <div class="helpKamba">
 
                                         <div class="optionHelpKamba1">
-                                            - Abra o App em seu telefone e escaneie o código
+                                            Abra o aplicativo Kamba no seu telemóvel e digitalize o código de pagamento.
                                         </div>
-                                        <div class="optionHelpKamba2">
-                                            - Como faço para digitalizar o código?
-                                        </div>
-                                        <div class="optionHelpKamba3">- Não tem uma conta Kamba? <a href="#" class="appLinkKamba"> Baixe o App</a>
+                                    
+                                        <div class="optionHelpKamba2">Não tem uma conta Kamba? <a href="https://usekamba.com/"  target="_blank" class="appLinkKamba"> Faça download do aplicativo.</a>
                                         </div>
 
                                     </div>
@@ -319,41 +317,38 @@ ready(function(){
                     descriptionKamba.style.width = '90%';
                     descriptionKamba.style.padding = '0 1rem';
                     descriptionKamba.style.textAlign = 'center';
+                    descriptionKamba.style.float = 'left';
 
                     var helpKamba = document.querySelector(".helpKamba");
                     helpKamba.style.textAlign = 'center';
 
                     var optionHelpKamba1 = document.querySelector(".optionHelpKamba1");
-                    optionHelpKamba1.style.marginTop = '0.5rem';
+                    optionHelpKamba1.style.fontSize = '0.735rem';
 
                     var optionHelpKamba2 = document.querySelector(".optionHelpKamba2");
-                    optionHelpKamba2.style.marginTop = '0.8rem';
-
-                    var optionHelpKamba3 = document.querySelector(".optionHelpKamba3");
-                    optionHelpKamba3.style.marginTop = '0.8rem';
+                    optionHelpKamba2.style.marginTop = '0.75rem';
+                    optionHelpKamba2.style.fontSize = '0.735rem';
 
                     var appLinkKamba = document.querySelector(".appLinkKamba");
                     appLinkKamba.style.textDecoration = 'none';
-                    appLinkKamba.style.color = '#0099ff';
+                    appLinkKamba.style.color = '#009933';
 
                     var footerKamba = document.querySelector(".footerKamba");
                     footerKamba.style.width = '90%';
                     footerKamba.style.float = 'left';
                     footerKamba.style.padding = '0 1rem';
+                    footerKamba.style.marginTop = '2rem';
 
                     var descritionKambaMerchant = document.querySelector(".descritionKambaMerchant");
-                    descritionKambaMerchant.style.marginTop = '1.7rem';
                     descritionKambaMerchant.style.float = 'left';
 
                     var btnCloseWidgetKamba = document.querySelector(".btnCloseWidgetKamba");
                     btnCloseWidgetKamba.title = 'Sair do pagamento';
                     btnCloseWidgetKamba.style.border = 'none';
                     btnCloseWidgetKamba.style.cursor = 'pointer';
-                    btnCloseWidgetKamba.style.fontSize = '1rem';
                     btnCloseWidgetKamba.style.borderRadius = '0.3rem';
                     btnCloseWidgetKamba.style.float = 'right';
                     btnCloseWidgetKamba.style.color = 'red';
-                    btnCloseWidgetKamba.style.paddingTop = '1.5rem';
 
                     btnCloseWidgetKamba.onclick = function(){
                         kambaModalContainer.style.display = 'none';
@@ -370,7 +365,7 @@ ready(function(){
                     function midiaMediumDivice(x) {
                         if (x.matches) { 
                              kambaModalWidget.style.width = '360px';
-                             kambaModalWidget.style.height = '490px';
+                             kambaModalWidget.style.height = '470px';
                              partDetailPay.style.width = '100%';
                              partDetailPay.style.float = 'left';
                              descritionKambaMerchant.style.float = 'left';
@@ -500,11 +495,3 @@ ready(function(){
         }
     })();
 })();
-
-
-
-
-
-
-
-
