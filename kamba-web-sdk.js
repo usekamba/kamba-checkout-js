@@ -337,7 +337,7 @@ ready(function(){
                     footerKamba.style.width = '90%';
                     footerKamba.style.float = 'left';
                     footerKamba.style.padding = '0 1rem';
-                    footerKamba.style.marginTop = '2rem';
+                    footerKamba.style.marginTop = '1.5rem';
 
                     var descritionKambaMerchant = document.querySelector(".descritionKambaMerchant");
                     descritionKambaMerchant.style.float = 'left';
@@ -365,7 +365,7 @@ ready(function(){
                     function midiaMediumDivice(x) {
                         if (x.matches) { 
                              kambaModalWidget.style.width = '360px';
-                             kambaModalWidget.style.height = '470px';
+                             kambaModalWidget.style.height = '475px';
                              partDetailPay.style.width = '100%';
                              partDetailPay.style.float = 'left';
                              descritionKambaMerchant.style.float = 'left';
