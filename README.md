@@ -73,7 +73,11 @@ Passo 3:
 			             
 			              secondary_config = 
 			              {
-			                environment: 'sandbox',
+							//Environment: production || sandbox
+							environment: 'sandbox',
+							
+							//Type-Key and Api-Key
+							type_key: 'Token',
 			                api_key: 'SUA_CHAVE_DA_API'
 			              }
 			              );
