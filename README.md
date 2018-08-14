@@ -88,7 +88,7 @@ Passo 3:
 
  		- O campo "currency" recebe tipo de moeda em que se pretende utilizar. O valor "AKZ" pode ser substituido por outros correspondentes de moeda.
 
-		- Substitua o valor do campo "notes" pelo nome do produto ou serviço que desejas comercializar, e coloque o preço do mesmo no valor do campo "initial_amount".
+		- Substitua o valor do campo "notes" por uma anotação a cerca do pagamento, e coloque o preço do mesmo no valor do campo "initial_amount".
 
 		- O campo "redirect_url_success" serve para receber o endereço da página que está a ser configurada, no entanto substitua o valor inicial deste campo o endereço da sua página Web.
 
