@@ -34,7 +34,7 @@ Faça chamada ao Plugin Javascript no cabeçalho da sua página Web ou no corpo 
 ```html
 	<head>     
 	      
-	    <script src="https://usekamba/kamba-web-sdk.js" charset="utf-8"></script>
+	    <script src="https://cdn.rawgit.com/usekamba/sandbox-kamba-checkout-js/master/kamba-checkout.js" charset="utf-8"></script>
 
 	</head>
 ```
@@ -45,64 +45,79 @@ Faça a inclusão do botão "pagar com a Kamba" dentro do corpo da sua página e
 ```html
 	<body>
 		
-    	<button class="btnOpenWidgetKamba" onclick="start_payment()"></button>
+    		<button class="btnOpenWidgetKamba" onclick="start_payment()"></button>
 
 	</body>
 ```
 
 Passo 3:
 
- - Cole o código Javascrip abaixo no corpo da sua página Web, de preferência no final da página.
+ - Cole o código Javascrip abaixo dentro da tag "body" no corpo da sua página Web, de preferência no final da página.
 
-```
+```html
+	<body>
 	 	<script type="text/javascript">
 
-	       	function start_payment() {  
-	      
-		        kamba(
-		        	initial_config =
-		            { 
-		              channel: 'WEBSITE',
-		              currency: 'AOA',
-		              initial_amount: 10500,
-		              notes: 'Curso API Iniciantes',
-		              redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
-		              payment_method: 'WALLET'
-		            },
-		           
-		            header = 
-		            {
-		              // production || sandbox
-		              enviroment: 'sandbox',
-		              api_key: 'Token soaO7K9kcFSbG3n0DHaDFwtt'
-		            }
-		            );
-
-	      	}
-
-	      	styleButtonPayKamba();
+		       	function start_payment() {
+		      
+			        kamba(
+			              initial_config =
+			              { 
+			                channel: 'WEBSITE',
+			                currency: 'AkZ',
+			                initial_amount: 10500,
+			                notes: 'Curso API Iniciantes',
+			                redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
+			                payment_method: 'WALLET'
+			              },
+			             
+			              secondary_config = 
+			              {
+							//Environment: production || sandbox
+							environment: 'sandbox',
+							
+							//Type-Key and Api-Key
+							type_key: 'Token',
+			                api_key: 'SUA_CHAVE_DA_API'
+			              }
+			              );
+			    }
 
 	    </script>
+	</body>
 	
 ```
 
  - Configurações Iniciais (initial_config)
 
-		- Substitua o valor do campo "notes" pelo nome do produto ou serviço que desejas comercializar, e coloque o preço do mesmo no valor do campo "initial_amount".
+ 		- O campo "currency" recebe tipo de moeda em que se pretende utilizar. O valor "AKZ" pode ser substituido por outros correspondentes de moeda.
 
-		- O campo "redirect_url_success" serve para receber o endereço da página que está a ser configurada, no entanto subistitua o valor inicial deste campo o endereço da sua página Web.
+		- Substitua o valor do campo "notes" por uma anotação a cerca do pagamento, e coloque o preço do mesmo no valor do campo "initial_amount".
+
+		- O campo "redirect_url_success" serve para receber o endereço da página que está a ser configurada, no entanto substitua o valor inicial deste campo o endereço da sua página Web.
 
 		- Para o resto dos campos acima as configurações no exemplo são suficientes.
 
- - Configurações de cabeçalho (header)
+ - Configurações secundárias (secondary_config)
 
-		- O campo "enviroment" serve para definir qual ambiente a ser usado, porém neste momento usaremos o ambiente de teste (sandbox).
+		- O campo "environment" define qual ambiente poderá ser usado. Que podem ser:
+
+		 	- Ambiente de teste (sandbox).
+		 	- Ambiente de produção (production).
+
+		 	Nota: Porém neste momento usaremos o ambiente de teste (sandbox).
 
 		- Use a chave da API que lhe será enviada para substituir o valor do campo "api_key".
 
 
 	
-> Recomendação: A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em https://docs.usekamba.com/#autenticacao.
+## Recomendações
+
+	> A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em https://docs.usekamba.com/#autenticacao.
+
+	> Por questões de segurança, para não deixar que a sua chave de API (api_key) esteja ao alcance de qualquer pessoa que acesse a sua página Web recomendamos que estabeleça a sua chave da API utilizando as variáveis de ambiente. Podendo utilizar algo como ENV["API_KEY"] no valor da chave da API e passar a verdadeira chave da API por meio de uma variável de ambiente.
+
+	> Por este período de testes recomendamos a utilização dos navegadores Google Chrome e Mozilla Firefox (Versões actualizadas).
 
 
 > Nota: Você também pode criar uma issue para deixar o seu feedback ou enviar o seu feedback para a nossa equipa. Nesta fase de implementação a sua opinião é extremamente importante.
