@@ -58,32 +58,29 @@ Passo 3:
 	<body>
 	 	<script type="text/javascript">
 
-		       	function start_payment() {
-		      
-			        kamba(
-			              initial_config =
-			              { 
-			                channel: 'WEBSITE',
-			                currency: 'AkZ',
-			                initial_amount: 10500,
-			                notes: 'Curso API Iniciantes',
-			                redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
-			                payment_method: 'WALLET'
-			              },
-			             
-			              secondary_config = 
-			              {
-							//Environment: production || sandbox
-							environment: 'sandbox',
-							
-							//Type-Key and Api-Key
-							type_key: 'Token',
-			                api_key: 'SUA_CHAVE_DA_API'
-			              }
-			              );
-			    }
+			function start_payment()
+			{
+			
+				kamba(
+						api_config = 
+						{
+							environment: 'sandbox', // production || sandbox
+							api_key: 'SUA_CHAVE_DA_API'
+						},
 
-	    </script>
+						checkout_config =
+						{ 
+							channel: 'WEBSITE',
+							currency: 'AOA',
+							initial_amount: 2000,
+							notes: 'Curso API Iniciantes',
+							redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
+							payment_method: 'WALLET'
+						}
+					 );
+			}
+     	</script>
+			       
 	</body>
 	
 ```

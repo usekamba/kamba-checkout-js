@@ -10,7 +10,7 @@ function ready (fn)
 ready(function(){
     //Style for button Pay with Kamba - Merchant
     var btnOpenWidgetKamba = document.querySelector(".btnOpenWidgetKamba");
-    btnOpenWidgetKamba.innerHTML = "Pagar com a Kamba";
+    btnOpenWidgetKamba.innerHTML = "Pagar com Kamba";
     var imgButtonKamba = document.createElement("img");
     imgButtonKamba.src="images/PayLogo-kamba.png";
     imgButtonKamba.classList.add("classImgButtonKamba");         
@@ -40,7 +40,7 @@ ready(function(){
 
         window.KAMBA = window.KAMBA || {};
 
-        window.kamba = function kamba(initial_config, secondary_config) {
+        window.kamba = function kamba(api_config, checkout_config) {
 
             function ready (fn){
                 if (document.readyState != 'loading') {
@@ -78,19 +78,20 @@ ready(function(){
                 canvasKamba.classList.add("myKambaCanvas");         
                 kambaModalProgressBarTemplate.appendChild(canvasKamba);
 
-                let canvas = document.querySelector('.myKambaCanvas');
-                let context = canvas.getContext('2d');
-                let al=0;
-                let start=4.72;
-                let cw=context.canvas.width/2;
-                let ch=context.canvas.height/2;
-                let diff;
+                var canvas = document.querySelector('.myKambaCanvas');
+                var context = canvas.getContext('2d');
+                var al=0;
+                var start=4.72;
+                var cw=context.canvas.width/2;
+                var ch=context.canvas.height/2;
+                var diff;
                 var bar=setInterval(kambaProgressBar,50);
 
                 //Send - Post request
-                let url;
+                var url;
+                var token = 'Token ';
            
-                if (secondary_config.environment == 'sandbox'){
+                if (api_config.environment == 'sandbox'){
                     url = "https://sandbox.usekamba.com/v1/checkouts/";
                 }else{
                     url = "https://api.usekamba.com/v1/checkouts/";
@@ -99,15 +100,15 @@ ready(function(){
                 fetch(url, {method: 'POST',
                     headers: {
                                 'Content-Type': 'application/json',
-                                'authorization': secondary_config.type_key+" "+secondary_config.api_key
+                                'authorization': token.concat(api_config.api_key)
                             }, 
                     body:  JSON.stringify({
-                            channel: initial_config.channel,
-                            currency: initial_config.currency,
-                            initial_amount: initial_config.initial_amount,
-                            notes: initial_config.notes,
-                            redirect_url_success: initial_config.redirect_url_success,
-                            payment_method: initial_config.payment_method
+                            channel: checkout_config.channel,
+                            currency: checkout_config.currency,
+                            initial_amount: checkout_config.initial_amount,
+                            notes: checkout_config.notes,
+                            redirect_url_success: checkout_config.redirect_url_success,
+                            payment_method: checkout_config.payment_method
                         })
 
                 }).then(function(response) {
@@ -188,12 +189,12 @@ ready(function(){
 
                                         <ul class="listProprietyProduct">
                                             <li class="nameProduct"><b> ${data.notes} </b></li>
-                                            <li class="priceProduct"><b>${initial_amount.toLocaleString('pt-ao', {style: 'currency', currency: initial_config.currency})} </b></li>
+                                            <li class="priceProduct"><b>${initial_amount.toLocaleString('pt-ao', {style: 'currency', currency: 'AKZ'})} </b></li>
                                         </ul>
 
                                         <ul class="listTotal">
                                             <li class="descriptionTotal"><b>TOTAL</b></li>
-                                            <li class="priceTotal"><b>${total_amount.toLocaleString('pt-ao', {style: 'currency', currency: initial_config.currency})} </b></li>
+                                            <li class="priceTotal"><b>${total_amount.toLocaleString('pt-ao', {style: 'currency', currency: 'AKZ'})} </b></li>
                                         </ul>
                                     </div>
 
@@ -413,12 +414,19 @@ ready(function(){
                   } else {
 
                     response.json().then(data => {
+                        
                         kambaModalProgressBarTemplate.style.display = 'none';
                         templateModalErrorPayKamba();
+                        var textErrorKamba = document.querySelector(".textErrorKamba");           
 
-                        var textErrorKamba = document.querySelector(".textErrorKamba");
-                        textErrorKamba.innerHTML = "Falha!... Verifique suas configurações de pagamento ou entra em contacto com a equipe da Kamba";
-                      
+                        if((typeof data.message !== 'undefined')){
+                            textErrorKamba.innerHTML =  `<p>${data.errors[0].field}: ${data.errors[0].message}</p>`;
+                        }
+                        
+                        if((typeof data.errors.code !== 'undefined')){
+                        textErrorKamba.innerHTML =  `<p>${data.errors.message} </p>`;
+                        }
+                                 
                     });
 
                   }
@@ -429,7 +437,7 @@ ready(function(){
                     templateModalErrorPayKamba();
 
                     var textErrorKamba = document.querySelector(".textErrorKamba");
-                    textErrorKamba.innerHTML = "Falha!... Verifique sua conexão com a internet, ela pode estar muito lenta";
+                    textErrorKamba.innerHTML = "Verifique sua conexão com a internet, ela pode estar muito lenta";
                 });
                
 

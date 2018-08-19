@@ -5,59 +5,53 @@
       <meta charset="utf-8">
 
        <!-- Chamada para o SDK versão Web Kamba -->
-    <script src="kamba-web-sdk.js" charset="utf-8"></script>
+       <script src="kamba-web-sdk.js" charset="utf-8"></script>
       
     </head>
 
     <body>
-    <center>
-    <h1>Página do Comerciante</h1>
-    <img src="Tenis.jpg">
-    <h4>TÊNIS JORDAN REVEAL MASCULINO</h4>
-    <h5>Preço: 10 500 Kz</h5>
+      <center>
+        <h1>Página do Comerciante</h1>
+        <img src="Tenis.jpg">
+        <h4>TÊNIS JORDAN REVEAL MASCULINO</h4>
+        <h5>Preço: 10 500 Kz</h5>
 
-    
-    <!-- Botão para pagamento -->
-    <button class="btnOpenWidgetKamba" onclick="start_payment()"></button>
-    <br>
-    <br>
-    <br>
+        
+        <!-- Botão para pagamento -->
+        <button class="btnOpenWidgetKamba" onclick="start_payment()"></button>
+        <br>
+        <br>
+        <br>
 
 
-    </center>
+      </center>
 
    
 
-    <script type="text/javascript">
+      <script type="text/javascript">
 
-       function start_payment()
-       {
-
-      //Configurações do comerciante
-      
-        kamba(
-              initial_config =
+        function start_payment()
+        {
+        
+          kamba(
+              api_config = 
+              {
+                environment: 'sandbox', // production || sandbox
+                api_key: 'SUA_CHAVE_DA_API'
+              },
+  
+              checkout_config =
               { 
                 channel: 'WEBSITE',
-                currency: 'AKZ',
-                initial_amount: 10500,
+                currency: 'AOA',
+                initial_amount: 2000,
                 notes: 'Curso API Iniciantes',
                 redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
                 payment_method: 'WALLET'
-              },
-             
-              secondary_config = 
-              {
-                //Environment: production || sandbox
-                environment: 'sandbox',
-                type_key: 'Token',
-                api_key: 'API_KEY'
               }
-              );
-
-      }
-
-    </script>
+             );
+        }
+         </script>
 
     </body>
 </html>
