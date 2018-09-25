@@ -123,7 +123,7 @@ ready(function(){
                     var initial_amount = new Number(data.initial_amount);
                     var total_amount = new Number(data.total_amount);
 
-                    var dateConvert = new Date(data.created_at);
+                    var dateConvert = new Date(data.expires_at);
                     var newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes(), dateConvert.getSeconds()].join(':');
 
                     var convertQrCode = data.qr_code.html;
@@ -170,7 +170,7 @@ ready(function(){
                                         <div class="divSvg">
                                         
                                             <svg viewBox="0 0 625 625" preserveAspectRatio="xMidYMid meet" class="imgQr">
-                                                    ${data.qr_code.svg}
+                                                    ${data.qr_code}
                                             </svg>
 
                                              <div class="textValidate">
