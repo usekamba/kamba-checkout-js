@@ -70,12 +70,10 @@ Passo 3:
 
 						checkout_config =
 						{ 
-							channel: 'WEBSITE',
-							currency: 'AOA',
-							initial_amount: 2000,
+							channel: 'WEB',
+							initial_amount: 3000,
 							notes: 'Curso API Iniciantes',
-							redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes',
-							payment_method: 'WALLET'
+							redirect_url_success: 'http://amarildolucas.com/curso/api-iniciantes'
 						}
 					 );
 			}
@@ -87,11 +85,13 @@ Passo 3:
 
  - Configurações Iniciais (initial_config)
 
- 		- O campo "currency" recebe tipo de moeda em que se pretende utilizar. O valor "AKZ" pode ser substituido por outros correspondentes de moeda.
+		- Para o nosso propósito o valor do campo "channel", permanecerá igual à WEB como no exemplo.
+
+		- initial_amount, este campo recebe o preço do produto ou serviço a ser comercializado.
 
 		- Substitua o valor do campo "notes" por uma anotação a cerca do pagamento, e coloque o preço do mesmo no valor do campo "initial_amount".
 
-		- O campo "redirect_url_success" serve para receber o endereço da página que está a ser configurada, no entanto substitua o valor inicial deste campo o endereço da sua página Web.
+		- O campo "redirect_url_success" recebe o endereço da página que na qual pretende-se ser redirecionada.
 
 		- Para o resto dos campos acima as configurações no exemplo são suficientes.
 
