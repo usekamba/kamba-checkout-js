@@ -9,14 +9,14 @@ function ready (fn)
 
 ready(function(){
     //Style for button Pay with Kamba - Merchant
-    var btnOpenWidgetKamba = document.querySelector(".btnOpenWidgetKamba");
+    const btnOpenWidgetKamba = document.querySelector(".btnOpenWidgetKamba");
     btnOpenWidgetKamba.innerHTML = "Pagar com Kamba";
-    var imgButtonKamba = document.createElement("img");
+    const imgButtonKamba = document.createElement("img");
     imgButtonKamba.src="images/PayLogo-kamba.png";
     imgButtonKamba.classList.add("classImgButtonKamba");         
     btnOpenWidgetKamba.appendChild(imgButtonKamba);
     
-    var classImgButtonKamba = document.querySelector(".classImgButtonKamba");
+    const classImgButtonKamba = document.querySelector(".classImgButtonKamba");
     classImgButtonKamba.style.width = '25%';
     classImgButtonKamba.style.marginLeft = '0.5rem';
       
@@ -53,10 +53,10 @@ ready(function(){
             ready(function(){
 
                 //modal template for post progress bar
-                var mainKambaModalContainer = document.createElement("main");
-                var kambaModalContainer = document.getElementsByTagName("body")[0].appendChild(mainKambaModalContainer);
+                const mainKambaModalContainer = document.createElement("main");
+                const kambaModalContainer = document.getElementsByTagName("body")[0].appendChild(mainKambaModalContainer);
                 kambaModalContainer.classList.add("kambaModalProgressBarTemplate");
-                var kambaModalProgressBarTemplate = document.querySelector('.kambaModalProgressBarTemplate');
+                const kambaModalProgressBarTemplate = document.querySelector('.kambaModalProgressBarTemplate');
                 kambaModalProgressBarTemplate.style.width = '100vw';
                 kambaModalProgressBarTemplate.style.height = '100%';
                 kambaModalProgressBarTemplate.style.background = 'rgba(0,0,0,.25)';
@@ -78,18 +78,18 @@ ready(function(){
                 canvasKamba.classList.add("myKambaCanvas");         
                 kambaModalProgressBarTemplate.appendChild(canvasKamba);
 
-                var canvas = document.querySelector('.myKambaCanvas');
-                var context = canvas.getContext('2d');
-                var al=0;
-                var start=4.72;
-                var cw=context.canvas.width/2;
-                var ch=context.canvas.height/2;
-                var diff;
-                var bar=setInterval(kambaProgressBar,50);
+                let canvas = document.querySelector('.myKambaCanvas');
+                let context = canvas.getContext('2d');
+                let al=0;
+                let start=4.72;
+                let cw=context.canvas.width/2;
+                let ch=context.canvas.height/2;
+                let diff;
+                let bar=setInterval(kambaProgressBar,50);
 
                 //Send - Post request
-                var url;
-                var token = 'Token ';
+                let url;
+                const token = 'Token ';
            
                 if (api_config.environment == 'sandbox'){
                     url = "https://sandbox.usekamba.com/v1/checkouts/";
@@ -120,15 +120,13 @@ ready(function(){
                     kambaModalProgressBarTemplate.style.display = 'none';
 
                     //To transform
-                    var initial_amount = new Number(data.initial_amount);
-                    var total_amount = new Number(data.total_amount);
+                    let initial_amount = new Number(data.initial_amount);
+                    let total_amount = new Number(data.total_amount);
 
-                    var dateConvert = new Date(data.expires_at);
-                    var newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes(), dateConvert.getSeconds()].join(':');
+                    let dateConvert = new Date(data.expires_at);
+                    let newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes(), dateConvert.getSeconds()].join(':');
 
-                    var convertQrCode = data.qr_code.html;
-
-                    var mainKambaModalContainer = document.createElement("main");
+                    const mainKambaModalContainer = document.createElement("main");
                    
                     //Modal Container
                     var kambaModalContainer = document.getElementsByTagName("body")[0].appendChild(mainKambaModalContainer);
@@ -169,7 +167,7 @@ ready(function(){
                                         
                                         <div class="divSvg">
                                         
-                                            <svg viewBox="0 0 625 625" preserveAspectRatio="xMidYMid meet" class="imgQr">
+                                            <svg viewBox="0 0 670 670" preserveAspectRatio="xMidYMid meet" class="imgQr">
                                                     ${data.qr_code}
                                             </svg>
 
@@ -231,9 +229,9 @@ ready(function(){
                         </section>
                     </div>`
                     kambaModalContainer.innerHTML = kambaWidget;
-
+        
                     //Style Widget Modal
-                    var kambaModalWidget = document.querySelector("main .kambaModalWidget");
+                    const kambaModalWidget = document.querySelector("main .kambaModalWidget");
                     kambaModalWidget.style.borderRadius = '0.2rem';
                     kambaModalWidget.style.overflow = 'auto';
                     kambaModalWidget.style.background = '#fff';
@@ -245,51 +243,50 @@ ready(function(){
                     kambaModalWidget.style.boxShadow = '0 5px 8px 0 rgba(0,0,0,.2), 0 7px 20px 0 rgba(0,0,0,.10)';
 
                     //Header
-                    var checkoutHeader = document.querySelector(".checkoutHeader");
+                    const checkoutHeader = document.querySelector(".checkoutHeader");
                     checkoutHeader.style.padding = '1rem 0 0 1rem';
                 
                     //Body
-                    var headerWidget = document.querySelector(".headerWidget");
+                    const headerWidget = document.querySelector(".headerWidget");
                     headerWidget.style.width = '100%';
                     headerWidget.style.float = 'left';
                     headerWidget.style.marginTop = '1rem';
                     headerWidget.style.background = 'white';
 
-
-                    var securityPay = document.querySelector(".securityPay");
+                    let securityPay = document.querySelector(".securityPay");
                     securityPay.style.marginRight = '1rem';
                     securityPay.style.float = 'right';
 
-                    var textSecurityPay = document.querySelector(".textSecurityPay");
+                    let textSecurityPay = document.querySelector(".textSecurityPay");
                     textSecurityPay.style.textDecoration = 'none';
                     textSecurityPay.style.display = 'flex';
                     textSecurityPay.style.justifyContent = 'center';
                     textSecurityPay.style.alignItems = 'center';
                     textSecurityPay.style.boxSizing = 'border-box';
 
-                    var ps = document.querySelector(".ps");
+                    let ps = document.querySelector(".ps");
                     ps.style.marginLeft = '0.2rem';
                     ps.style.color = '#666666';
                     ps.fontSize = '0.8rem';
 
-                    var qrPart = document.querySelector(".qrPart");
+                    let qrPart = document.querySelector(".qrPart");
                     qrPart.style.width = '100%';
                     qrPart.style.background = "#00ff5f";
                     qrPart.style.position = 'relative';
 
-                    var detailQr = document.querySelector(".detailQr");
+                    let detailQr = document.querySelector(".detailQr");
                     detailQr.style.width = '90%';
                     detailQr.style.float = 'left';
                     detailQr.style.background = 'white';
                     detailQr.style.boxSizing = 'border-box';
                     detailQr.style.textAlign = 'center';
 
-                    var divSvg = document.querySelector(".divSvg");
+                    let divSvg = document.querySelector(".divSvg");
                     divSvg.style.textAlign = 'center';
                     divSvg.style.padding = '0 1rem 1rem 1rem';
                     divSvg.style.width = '100%';
 
-                    var imgQr = document.querySelector(".imgQr");
+                    let imgQr = document.querySelector(".imgQr");
                     imgQr.style.width = '50%';
                     imgQr.style.height = '50%';
                     imgQr.style.textAlign = 'center';
@@ -297,7 +294,7 @@ ready(function(){
                     imgQr.style.padding = '0.5rem';
                     imgQr.style.borderRadius = '0.3rem';
 
-                    var textValidate = document.querySelector(".textValidate");
+                    let textValidate = document.querySelector(".textValidate");
                     textValidate.style.textAlign = 'center';
                     textValidate.style.fontSize = '0.72rem';
                     textValidate.style.marginTop = '1rem';
@@ -305,17 +302,17 @@ ready(function(){
                     textValidate.style.width = '100%';
 
                     //Pay Detail
-                    var partDetailPay = document.querySelector(".partDetailPay");
+                    let partDetailPay = document.querySelector(".partDetailPay");
                     partDetailPay.style.width = '100%';
                     partDetailPay.style.float = 'left';
                     partDetailPay.style.background = 'white';
 
-                    var payDetail = document.querySelector(".payDetail");
+                    let payDetail = document.querySelector(".payDetail");
                     payDetail.style.width = '92%';
                     payDetail.style.float = 'left';
                     payDetail.style.margin = '1rem 1rem 0 1rem';
 
-                    var listProprietyProduct = document.querySelector(".listProprietyProduct");
+                    let listProprietyProduct = document.querySelector(".listProprietyProduct");
                     listProprietyProduct.style.width = '100%';
                     listProprietyProduct.style.listStyle = 'none';
                     listProprietyProduct.style.float = 'left';
@@ -323,13 +320,13 @@ ready(function(){
                     listProprietyProduct.style.paddingLeft = '0';
                     listProprietyProduct.style.background = 'white';
 
-                    var nameProduct = document.querySelector(".nameProduct");
+                    let nameProduct = document.querySelector(".nameProduct");
                     nameProduct.style.float = 'left';
 
-                    var priceProduct = document.querySelector(".priceProduct");
+                    let priceProduct = document.querySelector(".priceProduct");
                     priceProduct.style.float = 'right';
 
-                    var listTotal = document.querySelector(".listTotal");
+                    let listTotal = document.querySelector(".listTotal");
                     listTotal.style.width = '100%';
                     listTotal.style.listStyle = 'none';
                     listTotal.style.float = 'left';
@@ -339,42 +336,42 @@ ready(function(){
                     listTotal.style.borderBottom = '1px solid #D2CFCF';
                     listTotal.style.paddingBottom = '0.1rem';
 
-                    var descriptionTotal = document.querySelector(".descriptionTotal");
+                    let descriptionTotal = document.querySelector(".descriptionTotal");
                     descriptionTotal.style.float = 'left';
 
-                    var priceTotal = document.querySelector(".priceTotal");
+                    let priceTotal = document.querySelector(".priceTotal");
                     priceTotal.style.float = 'right';
 
-                    var descriptionKamba = document.querySelector(".descriptionKamba");
+                    let descriptionKamba = document.querySelector(".descriptionKamba");
                     descriptionKamba.style.width = '90%';
                     descriptionKamba.style.padding = '0 1rem';
                     descriptionKamba.style.textAlign = 'center';
                     descriptionKamba.style.float = 'left';
 
-                    var helpKamba = document.querySelector(".helpKamba");
+                    let helpKamba = document.querySelector(".helpKamba");
                     helpKamba.style.textAlign = 'center';
 
-                    var optionHelpKamba1 = document.querySelector(".optionHelpKamba1");
+                    let optionHelpKamba1 = document.querySelector(".optionHelpKamba1");
                     optionHelpKamba1.style.fontSize = '0.735rem';
 
-                    var optionHelpKamba2 = document.querySelector(".optionHelpKamba2");
+                    let optionHelpKamba2 = document.querySelector(".optionHelpKamba2");
                     optionHelpKamba2.style.marginTop = '0.75rem';
                     optionHelpKamba2.style.fontSize = '0.735rem';
 
-                    var appLinkKamba = document.querySelector(".appLinkKamba");
+                    let appLinkKamba = document.querySelector(".appLinkKamba");
                     appLinkKamba.style.textDecoration = 'none';
                     appLinkKamba.style.color = '#3399cc';
 
-                    var footerKamba = document.querySelector(".footerKamba");
+                    let footerKamba = document.querySelector(".footerKamba");
                     footerKamba.style.width = '90%';
                     footerKamba.style.float = 'left';
                     footerKamba.style.padding = '0 1rem';
                     footerKamba.style.marginTop = '1.5rem';
 
-                    var descritionKambaMerchant = document.querySelector(".descritionKambaMerchant");
+                    let descritionKambaMerchant = document.querySelector(".descritionKambaMerchant");
                     descritionKambaMerchant.style.float = 'left';
 
-                    var btnCloseWidgetKamba = document.querySelector(".btnCloseWidgetKamba");
+                    let btnCloseWidgetKamba = document.querySelector(".btnCloseWidgetKamba");
                     btnCloseWidgetKamba.title = 'Sair do pagamento';
                     btnCloseWidgetKamba.style.border = 'none';
                     btnCloseWidgetKamba.style.cursor = 'pointer';
@@ -405,7 +402,7 @@ ready(function(){
                         }
                     }
 
-                    var x = window.matchMedia("(min-width: 641px)")
+                    let x = window.matchMedia("(min-width: 641px)")
                     midiaMediumDivice(x)
                     x.addListener(midiaMediumDivice)
 
@@ -417,7 +414,7 @@ ready(function(){
                         
                         kambaModalProgressBarTemplate.style.display = 'none';
                         templateModalErrorPayKamba();
-                        var textErrorKamba = document.querySelector(".textErrorKamba");           
+                        let textErrorKamba = document.querySelector(".textErrorKamba");           
 
                         if((typeof data.message !== 'undefined')){
                             textErrorKamba.innerHTML =  `<p>${data.errors[0].field}: ${data.errors[0].message}</p>`;
@@ -436,14 +433,14 @@ ready(function(){
                     kambaModalProgressBarTemplate.style.display = 'none';
                     templateModalErrorPayKamba();
 
-                    var textErrorKamba = document.querySelector(".textErrorKamba");
+                    let textErrorKamba = document.querySelector(".textErrorKamba");
                     textErrorKamba.innerHTML = "Verifique sua conexão com a internet, ela pode estar muito lenta";
                 });
                
 
 
                function templateModalErrorPayKamba(){
-                   var mainKambaModalContainer = document.createElement("main");
+                   const mainKambaModalContainer = document.createElement("main");
                    
                     //Modal Container
                     var kambaModalContainer = document.getElementsByTagName("body")[0].appendChild(mainKambaModalContainer);
