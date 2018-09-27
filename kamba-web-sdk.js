@@ -387,7 +387,6 @@ ready(function(){
                     document.querySelector(".btnOpenWidgetKamba").onclick = function(){
                         kambaModalContainer.style.display = 'flex';
                     };
-
                     
 
                     //Function Midia Query - MEDIUM and LARGE
