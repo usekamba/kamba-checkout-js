@@ -12,7 +12,7 @@ ready(function(){
     const btnOpenWidgetKamba = document.querySelector(".btnOpenWidgetKamba");
     btnOpenWidgetKamba.innerHTML = "Pagar com Kamba";
     const imgButtonKamba = document.createElement("img");
-    imgButtonKamba.src="images/PayLogo-kamba.png";
+    imgButtonKamba.src="https://image.ibb.co/mFZUTz/Pay_Logo_kamba.png";
     imgButtonKamba.classList.add("classImgButtonKamba");         
     btnOpenWidgetKamba.appendChild(imgButtonKamba);
     
@@ -153,7 +153,7 @@ ready(function(){
                         <header class="checkoutHeader">
 
                             <div class="securityPay">
-                                        <div class="textSecurityPay"><img src="images/icons8-lock-kamba.png" class="lock"> <span class="ps"> Pagamento seguro</span></div>
+                                        <div class="textSecurityPay"><img src="https://image.ibb.co/bxv8MK/icons8_lock_kamba.png" class="lock"> <span class="ps"> Pagamento seguro</span></div>
                                     </div>
                         </header>
                      
