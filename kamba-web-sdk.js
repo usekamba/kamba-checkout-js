@@ -7,11 +7,12 @@ function ready (fn)
     }
 }
 
-
 // Check if devise is mobile?
 function isMobileDevice() {
   return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
+
+
 
 ready(function(){
     //Style for button Pay with Kamba - Merchant
