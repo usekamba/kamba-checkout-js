@@ -7,19 +7,27 @@ function ready (fn)
     }
 }
 
+
+// Check if devise is mobile?
+function isMobileDevice() {
+  return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+};
+
 ready(function(){
     //Style for button Pay with Kamba - Merchant
     const btnOpenWidgetKamba = document.querySelector(".btnOpenWidgetKamba");
     btnOpenWidgetKamba.innerHTML = "Pagar com Kamba";
     const imgButtonKamba = document.createElement("img");
+
     imgButtonKamba.src="https://image.ibb.co/mFZUTz/Pay_Logo_kamba.png";
-    imgButtonKamba.classList.add("classImgButtonKamba");         
+
+    imgButtonKamba.classList.add("classImgButtonKamba");
     btnOpenWidgetKamba.appendChild(imgButtonKamba);
-    
+
     const classImgButtonKamba = document.querySelector(".classImgButtonKamba");
     classImgButtonKamba.style.width = '25%';
     classImgButtonKamba.style.marginLeft = '0.5rem';
-      
+
     btnOpenWidgetKamba.style.backgroundImage = 'linear-gradient(to left, #00FFB3, #00ff5f)';
     btnOpenWidgetKamba.style.border = 'none';
     btnOpenWidgetKamba.style.padding = '0.5rem';
@@ -75,7 +83,7 @@ ready(function(){
                 let canvasKamba = document.createElement("canvas");
                 canvasKamba.width="500";
                 canvasKamba.height="200";
-                canvasKamba.classList.add("myKambaCanvas");         
+                canvasKamba.classList.add("myKambaCanvas");
                 kambaModalProgressBarTemplate.appendChild(canvasKamba);
 
                 let canvas = document.querySelector('.myKambaCanvas');
@@ -90,7 +98,7 @@ ready(function(){
                 //Send - Post request
                 let url;
                 const token = 'Token ';
-           
+
                 if (api_config.environment == 'sandbox'){
                     url = "https://sandbox.usekamba.com/v1/checkouts/";
                 }else{
@@ -101,7 +109,7 @@ ready(function(){
                     headers: {
                                 'Content-Type': 'application/json',
                                 'authorization': token.concat(api_config.api_key)
-                            }, 
+                            },
                     body:  JSON.stringify({
                             channel: checkout_config.channel,
                             currency: checkout_config.currency,
@@ -127,7 +135,7 @@ ready(function(){
                     let newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes(), dateConvert.getSeconds()].join(':');
 
                     const mainKambaModalContainer = document.createElement("main");
-                   
+
                     //Modal Container
                     var kambaModalContainer = document.getElementsByTagName("body")[0].appendChild(mainKambaModalContainer);
                     kambaModalContainer.classList.add("kambaModalContainer");
@@ -156,17 +164,17 @@ ready(function(){
                                         <div class="textSecurityPay"><img src="https://image.ibb.co/bxv8MK/icons8_lock_kamba.png" class="lock"> <span class="ps"> Pagamento seguro</span></div>
                                     </div>
                         </header>
-                     
+
                         <section>
 
                             <article class="headerWidget">
-                                
+
                                 <div class="qrPart">
 
                                     <div class="detailQr">
-                                        
+
                                         <div class="divSvg">
-                                        
+
                                             <svg viewBox="0 0 670 670" preserveAspectRatio="xMidYMid meet" class="imgQr">
                                                     ${data.qr_code}
                                             </svg>
@@ -177,12 +185,12 @@ ready(function(){
                                         </div>
 
                                     </div>
-                             
-                                
+
+
                                 </div>
-            
+
                                 <div class="partDetailPay">
-                
+
                                     <div class="payDetail">
 
                                         <ul class="listProprietyProduct">
@@ -196,8 +204,8 @@ ready(function(){
                                         </ul>
                                     </div>
 
-                                </div>                  
-                                          
+                                </div>
+
                             </article>
                             <article>
 
@@ -208,28 +216,28 @@ ready(function(){
                                         <div class="optionHelpKamba1">
                                             Abra o aplicativo Kamba no seu telemóvel e digitalize o código de pagamento.
                                         </div>
-                                    
+
                                         <div class="optionHelpKamba2">Não tem uma conta Kamba? <a href="https://usekamba.com/"  target="_blank" class="appLinkKamba"> Faça download do aplicativo.</a>
                                         </div>
 
                                     </div>
-                                    
+
                                 </div>
-             
+
                             </article>
                             <footer class="footerKamba">
                                 <div class="descritionKambaMerchant">Pagar <b> ${data.merchant.business_name} </b>
                                 </div>
-                                    
+
                                 <div class="btnCloseWidgetKamba">
                                     Fechar
-                                </div> 
+                                </div>
                             </footer>
 
                         </section>
                     </div>`
                     kambaModalContainer.innerHTML = kambaWidget;
-        
+
                     //Style Widget Modal
                     const kambaModalWidget = document.querySelector("main .kambaModalWidget");
                     kambaModalWidget.style.borderRadius = '0.2rem';
@@ -245,7 +253,7 @@ ready(function(){
                     //Header
                     const checkoutHeader = document.querySelector(".checkoutHeader");
                     checkoutHeader.style.padding = '1rem 0 0 1rem';
-                
+
                     //Body
                     const headerWidget = document.querySelector(".headerWidget");
                     headerWidget.style.width = '100%';
@@ -386,12 +394,17 @@ ready(function(){
                     //Button for Pay Kamba
                     document.querySelector(".btnOpenWidgetKamba").onclick = function(){
                         kambaModalContainer.style.display = 'flex';
+
+                            var kkk = $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+
+                            console.log(kkk);
+
                     };
-                    
+
 
                     //Function Midia Query - MEDIUM and LARGE
                     function midiaMediumDivice(x) {
-                        if (x.matches) { 
+                        if (x.matches) {
                              kambaModalWidget.style.width = '360px';
                              kambaModalWidget.style.height = '475px';
                              partDetailPay.style.width = '100%';
@@ -410,19 +423,19 @@ ready(function(){
                   } else {
 
                     response.json().then(data => {
-                        
+
                         kambaModalProgressBarTemplate.style.display = 'none';
                         templateModalErrorPayKamba();
-                        let textErrorKamba = document.querySelector(".textErrorKamba");           
+                        let textErrorKamba = document.querySelector(".textErrorKamba");
 
                         if((typeof data.message !== 'undefined')){
                             textErrorKamba.innerHTML =  `<p>${data.errors[0].field}: ${data.errors[0].message}</p>`;
                         }
-                        
+
                         if((typeof data.errors.code !== 'undefined')){
                         textErrorKamba.innerHTML =  `<p>${data.errors.message} </p>`;
                         }
-                                 
+
                     });
 
                   }
@@ -435,12 +448,12 @@ ready(function(){
                     let textErrorKamba = document.querySelector(".textErrorKamba");
                     textErrorKamba.innerHTML = "Verifique sua conexão com a internet, ela pode estar muito lenta";
                 });
-               
+
 
 
                function templateModalErrorPayKamba(){
                    const mainKambaModalContainer = document.createElement("main");
-                   
+
                     //Modal Container
                     var kambaModalContainer = document.getElementsByTagName("body")[0].appendChild(mainKambaModalContainer);
                     kambaModalContainer.classList.add("kambaModalContainer");
@@ -472,7 +485,7 @@ ready(function(){
                     const kambaWidget = `
 
                     <div class="kambaModalWidget">
-                        <section> 
+                        <section>
                                 <p class="textErrorKamba"></p>
                         </section>
                     </div>`
@@ -500,10 +513,10 @@ ready(function(){
 
                     //Function Midia Query - MEDIUM
                     function midiaMediumDivice(x) {
-                        if (x.matches) { 
+                        if (x.matches) {
                              kambaModalWidget.style.width = '40%';
                              kambaModalWidget.style.height = '30%';
-                            
+
                         }
                     }
 
@@ -513,19 +526,19 @@ ready(function(){
 
                     //Function Midia Query - LARGE
                     function midiaLargeDivice(x) {
-                        if (x.matches) {   
+                        if (x.matches) {
                             kambaModalWidget.style.width = '25%';
                             kambaModalWidget.style.height = '30%';
-                
-                        } 
+
+                        }
                     }
 
                     var x = window.matchMedia("(min-width: 1025PX)")
                     midiaLargeDivice(x)
                     x.addListener(midiaLargeDivice)
-                
-               }   
-               
+
+               }
+
                //Function Kamba Progress Bar
                function kambaProgressBar()
                {
@@ -551,11 +564,11 @@ ready(function(){
                     {
                         clearTimeout(bar);
                     }
-                    
+
                     al++;
                 }
-               
-            })  
+
+            })
         }
     })();
 })();
