@@ -309,7 +309,7 @@ ready(function() {
                 align-items: center;
                 box-sizing: border-box;
                 text-decoration: none;
-		color: #000;
+		            color: #000;
               }
             </style>
             `
@@ -633,4 +633,3 @@ ready(function() {
 
   })();
 })();
-
