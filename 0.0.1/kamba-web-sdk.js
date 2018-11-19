@@ -77,7 +77,7 @@ ready(function() {
         const kambaModalProgressBarTemplate = document.querySelector('.kambaModalProgressBarTemplate');
         kambaModalProgressBarTemplate.style.width = '100vw';
         kambaModalProgressBarTemplate.style.height = '100%';
-        kambaModalProgressBarTemplate.style.background = 'rgba(0,0,0,.25)';
+        kambaModalProgressBarTemplate.style.background = 'rgba(0,0,0,.45)';
         kambaModalProgressBarTemplate.style.position = 'fixed';
         kambaModalProgressBarTemplate.style.top = '0';
         kambaModalProgressBarTemplate.style.left = '0';
@@ -141,7 +141,7 @@ ready(function() {
             let total_amount = new Number(data.total_amount);
 
             let dateConvert = new Date(data.expires_at);
-            let newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes(), dateConvert.getSeconds()].join(':');
+            let newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes()].join(':');
 
             const mainKambaModalContainer = document.createElement('main');
             //Modal Container
@@ -177,98 +177,63 @@ ready(function() {
             <div class="kambaModalWidget">
 
                 <header class="checkoutHeader">
-                  <div class="securityPay">
-                    <div class="textSecurityPay"><img src="https://image.ibb.co/bxv8MK/icons8_lock_kamba.png" class="lock"> <span class="ps"> Pagamento seguro</span></div>
-                  </div>
+                  <div class="cancelKambaCheckout">Cancelar</div>
+                  <div class="newTrasactionKamba">Nova transação</div>
+                  <div class="HowToPayKambaMerchant">Como pagar?</div>
                 </header>
 
                 <section>
 
-                    <article class="headerWidget">
+                    <article class="showBusinessKamba">
+                      <div>
+                        <img src="https://image.ibb.co/gJm1pf/Loja-small.png" alt="Loja-small" border="0" class="imgShopBusinessKamba">
+                      </div>
 
-                        <div class="qrPart">
-
-                            <div class="detailQr">
-
-                                <div class="divSvg">
-
-                                    <svg viewBox="0 0 670 670" preserveAspectRatio="xMidYMid meet" class="imgQr">
-                                      ${data.qr_code}
-                                    </svg>
-
-                                    <div class="textValidate">
-                                      Válido até ${newDateConvert}
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-                        <div class="partDetailPay">
-
-                            <div class="payDetail">
-
-                                <ul class="listProprietyProduct">
-                                    <li class="nameProduct"><b> ${data.notes} </b></li>
-                                    <li class="priceProduct"><b>${initial_amount.toLocaleString('pt-ao', {style: 'currency', currency: 'AKZ'})} </b></li>
-                                </ul>
-
-                                <ul class="listTotal">
-                                    <li class="descriptionTotal"><b>TOTAL</b></li>
-                                    <li class="priceTotal"><b>${total_amount.toLocaleString('pt-ao', {style: 'currency', currency: 'AKZ'})} </b></li>
-                                </ul>
-                            </div>
-
-                        </div>
-
+                      <div class="descriptionBusinessKamba">
+                        <div class="descritionKambaMerchant">${data.merchant.business_name}</div>
+                        <div class="priceProductKambaMerchant">${total_amount.toLocaleString('pt-ao', {style: 'currency', currency: 'AKZ'})}</div>
+                      </div>
                     </article>
-                    <article>
 
-                        <div  class="descriptionKamba">
+                    <hr>
 
-                            <div class="helpKamba">
+                    <div class="nameProductKambaMerchant">${data.notes}</div>
 
-                              <div class="hidden-lg">
-                                <div class="optionHelpKamba1">
-                                  <p style="text-align: center; margin: 0; font-size: 12px; color: #080d30; ">
-                                    Não tem uma conta Kamba?
-                                    <a style="text-decoration: none; color: #2CE080;" href="https://www.usekamba.com/" target="_blank">
-                                      Faça download do aplicativo.
-                                    </a>
-                                  </p>
-                                  <br>
-                                  <a href="${MOBILE_PATH}" class="btnKamba">
+                    <article class="qrPartKambaMerchant">
+                     
+                      <div class="SvgKambaMerchant">
+
+                          <svg viewBox="0 0 670 670" preserveAspectRatio="xMidYMid meet" class="imgQrKambaMerchant">
+                              ${data.qr_code}
+                          </svg>
+
+                          <div class="textValidatKambaMerchant">
+                            Expira em ${newDateConvert}
+                          </div>
+                      </div>
+
+                      <div class="optionHelpKamba1">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Abra a sua carteira Kamba e escaneie o código de pagamento.
+                      </div>
+                      <div class="openAppKamba">
+                        <a href="${MOBILE_PATH}" class="btnKamba">
                                     Clica para pagar com Kamba
-                                    <img src="https://image.ibb.co/mFZUTz/Pay_Logo_kamba.png">
+                                    <img src="https://image.ibb.co/mFZUTz/Pay_Logo_kamba.png" class="btnImgPayKamba">
                                   </a>
-                                </div>
-                              </div>
-
-                              <div class="hidden-xs">
-                                <div class="optionHelpKamba1">
-                                  Abra o aplicativo Kamba no seu telemóvel e digitalize o código de pagamento.
-                                </div>
-
-                                <div class="optionHelpKamba2">Não tem uma conta Kamba? <a href="https://usekamba.com/"  target="_blank" class="appLinkKamba"> Faça download do aplicativo.</a>
-                                </div>
-                              </div>
-
-
-                            </div>
-
-                        </div>
+                      </div>
 
                     </article>
-                    <br>
-                    <footer class="footerKamba">
-                      <div class="descritionKambaMerchant">Pagar <b> ${data.merchant.business_name} </b>
+
+                    <footer class="footerCheckoutKamba">
+
+                      <div>
+                        <img src="https://image.ibb.co/nrFpaL/Logo-small.png" alt="Logo-small" border="0" class="logoUseKamba">
                       </div>
 
-                      <div class="btnCloseWidgetKamba">
-                          Fechar
+                      <div class="securityPayKamba">
+                        <div class="textSecurityPay"><img src="https://image.ibb.co/bxv8MK/icons8_lock_kamba.png" class="lock"> <span class="descriptionSecurityPayKamba">Conexão segura</span></div>
                       </div>
+
                     </footer>
 
                 </section>
@@ -276,49 +241,178 @@ ready(function() {
 
             <style>
 
-              @media (min-width: 501px) {
-                .hidden-xs{
-                  display: block!important;
-                }
-
-                .hidden-lg{
-                  display: none!important;;
-                }
+              .checkoutHeader {
+                background: #01ff5e;
+                height: 1rem;
+                color: #fff;
+                font-size: 1rem;
+                padding: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
               }
 
-              @media (max-width: 499px) {
-                .hidden-xs{
-                  display: none!important;
+              .cancelKambaCheckout {
+                cursor: pointer;
+                margin-right: 1rem;
+              }
+
+              .newTrasactionKamba  {
+                font-weight: bolder;
+                margin-right: 1rem;
+              }
+
+              .showBusinessKamba {
+                padding: 1.2rem 1rem 0 1rem;
+                display: flex;
+              }
+
+              .imgShopBusinessKamba {
+                width: 88%;
+                height: 91%;
+              }
+
+              .descriptionBusinessKamba{
+                margin-left: 0.5rem;
+              }
+
+              .descritionKambaMerchant {     
+                font-size: 0.9rem;
+                font-weight: bolder;
+                color: rgb(105, 105, 105);
+                margin-bottom: 0.5rem;
+              }
+
+              .priceProductKambaMerchant {
+                font-size: 1.1rem;
+                font-weight: bolder;
+              }
+
+              .nameProductKambaMerchant {
+                padding: 0.5rem 1rem;
+                color: rgb(105, 105, 105);
+                font-weight: bolder;
+              }
+
+              .qrPartKambaMerchant {
+                width: 100%;
+                position: relative;
+              }
+
+              .SvgKambaMerchant {
+                text-align: center;
+                width: 100%;
+              }
+
+              .imgQrKambaMerchant {
+                width: 41%;
+                height: 41%;
+                text-align: center;
+                border: 2px solid #000;
+                padding: 0.2rem;
+                margin: 0.5rem 0;
+              }
+
+              .textValidatKambaMerchant {
+                font-size: 0.7rem;
+                font-weight: bolder;
+                color: rgb(105, 105, 105);
+              }
+
+              .optionHelpKamba1 {
+                text-align: center;
+                font-weight: bolder;
+                margin-top: 1rem;
+                font-size: 0.8rem;
+                padding: 0 1rem;
+              }
+
+              .footerCheckoutKamba {
+                display: flex;
+                padding: 1rem 1rem 0.5rem 1rem;
+              }
+
+              .securityPayKamba {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-left: 4rem;
+              }
+
+              .textSecurityPay {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+              }
+
+              .descriptionSecurityPayKamba {
+                margin-left: 0.2rem;
+                color: #000;
+                font-size: 0.8rem;
+                font-weight: bolder;
+              }
+
+              @-moz-document url-prefix() {
+                .cancelKambaCheckout {
+                  font-size: 0.88rem;
                 }
 
-                .hidden-lg{
-                  display: block!important;;
+                .newTrasactionKamba  {
+                  font-size: 0.88rem;
                 }
+
+                .HowToPayKambaMerchant {
+                  font-size: 0.88rem;
+                }
+
+                .optionHelpKamba1 {
+                  font-size: 0.8rem;
+                }
+
+                .textValidatKambaMerchant {
+                font-size: 0.6rem;
+                }
+
               }
 
               a.btnKamba {
                 background-image: linear-gradient(to left, rgb(0, 255, 179), rgb(0, 255, 95))!important;
-                border: none;
                 padding: 0.5rem;
                 cursor: pointer;
-                font-size: 1rem;
+                font-size: 0.9rem;
                 border-radius: 0.3rem;
                 font-family: Montserrat, sans-serif;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                box-sizing: border-box;
                 text-decoration: none;
-		            color: #000;
+                color: #000;
               }
+
+              .btnImgPayKamba {
+                width: 15%;
+                height: 15%;
+                margin-left: 0.5rem;
+              }
+
+              .openAppKamba {
+                padding: 3rem 1rem 1rem 1rem;
+              }
+
+              @media only screen and (min-width: 40.063em) {
+                .openAppKamba{
+                  display: none;
+                }
+              }
+    
             </style>
             `
-
             kambaModalContainer.innerHTML = kambaWidget;
 
             //Style Widget Modal
             const kambaModalWidget = document.querySelector('main .kambaModalWidget');
-            kambaModalWidget.style.borderRadius = '0.2rem';
+            kambaModalWidget.style.borderRadius = '0.5rem';
             kambaModalWidget.style.overflow = 'auto';
             kambaModalWidget.style.background = '#fff';
             kambaModalWidget.style.width = '100%';
@@ -328,142 +422,9 @@ ready(function() {
             kambaModalWidget.style.fontSize = '0.85rem';
             kambaModalWidget.style.boxShadow = '0 5px 8px 0 rgba(0,0,0,.2), 0 7px 20px 0 rgba(0,0,0,.10)';
 
-            //Header
-            const checkoutHeader = document.querySelector('.checkoutHeader');
-            checkoutHeader.style.padding = '1rem 0 0 1rem';
-
-            //Body
-            const headerWidget = document.querySelector('.headerWidget');
-            headerWidget.style.width = '100%';
-            headerWidget.style.float = 'left';
-            headerWidget.style.marginTop = '1rem';
-            headerWidget.style.background = 'white';
-
-            let securityPay = document.querySelector('.securityPay');
-            securityPay.style.marginRight = '1rem';
-            securityPay.style.float = 'right';
-
-            let textSecurityPay = document.querySelector('.textSecurityPay');
-            textSecurityPay.style.textDecoration = 'none';
-            textSecurityPay.style.display = 'flex';
-            textSecurityPay.style.justifyContent = 'center';
-            textSecurityPay.style.alignItems = 'center';
-            textSecurityPay.style.boxSizing = 'border-box';
-
-            let ps = document.querySelector('.ps');
-            ps.style.marginLeft = '0.2rem';
-            ps.style.color = '#666666';
-            ps.fontSize = '0.8rem';
-
-            let qrPart = document.querySelector('.qrPart');
-            qrPart.style.width = '100%';
-            qrPart.style.background = '#00ff5f';
-            qrPart.style.position = 'relative';
-
-            let detailQr = document.querySelector('.detailQr');
-            detailQr.style.width = '90%';
-            detailQr.style.float = 'left';
-            detailQr.style.background = 'white';
-            detailQr.style.boxSizing = 'border-box';
-            detailQr.style.textAlign = 'center';
-
-            let divSvg = document.querySelector('.divSvg');
-            divSvg.style.textAlign = 'center';
-            divSvg.style.padding = '0 1rem 1rem 1rem';
-            divSvg.style.width = '100%';
-
-            let imgQr = document.querySelector('.imgQr');
-            imgQr.style.width = '50%';
-            imgQr.style.height = '50%';
-            imgQr.style.textAlign = 'center';
-            imgQr.style.boxShadow = '0px 0px 5px #7f7f7f';
-            imgQr.style.padding = '0.5rem';
-            imgQr.style.borderRadius = '0.3rem';
-
-            let textValidate = document.querySelector('.textValidate');
-            textValidate.style.textAlign = 'center';
-            textValidate.style.fontSize = '0.72rem';
-            textValidate.style.marginTop = '1rem';
-            textValidate.style.float = 'left';
-            textValidate.style.width = '100%';
-
-            //Pay Detail
-            let partDetailPay = document.querySelector('.partDetailPay');
-            partDetailPay.style.width = '100%';
-            partDetailPay.style.float = 'left';
-            partDetailPay.style.background = 'white';
-
-            let payDetail = document.querySelector('.payDetail');
-            payDetail.style.width = '92%';
-            payDetail.style.float = 'left';
-            payDetail.style.margin = '1rem 1rem 0 1rem';
-
-            let listProprietyProduct = document.querySelector('.listProprietyProduct');
-            listProprietyProduct.style.width = '100%';
-            listProprietyProduct.style.listStyle = 'none';
-            listProprietyProduct.style.float = 'left';
-            listProprietyProduct.style.marginLeft = '0';
-            listProprietyProduct.style.paddingLeft = '0';
-            listProprietyProduct.style.background = 'white';
-
-            let nameProduct = document.querySelector('.nameProduct');
-            nameProduct.style.float = 'left';
-
-            let priceProduct = document.querySelector('.priceProduct');
-            priceProduct.style.float = 'right';
-
-            let listTotal = document.querySelector('.listTotal');
-            listTotal.style.width = '100%';
-            listTotal.style.listStyle = 'none';
-            listTotal.style.float = 'left';
-            listTotal.style.marginLeft = '0';
-            listTotal.style.paddingLeft = '0';
-            listTotal.style.background = 'white';
-            listTotal.style.borderBottom = '1px solid #D2CFCF';
-            listTotal.style.paddingBottom = '0.1rem';
-
-            let descriptionTotal = document.querySelector('.descriptionTotal');
-            descriptionTotal.style.float = 'left';
-
-            let priceTotal = document.querySelector('.priceTotal');
-            priceTotal.style.float = 'right';
-
-            let descriptionKamba = document.querySelector('.descriptionKamba');
-            descriptionKamba.style.width = '90%';
-            descriptionKamba.style.padding = '0 1rem';
-            descriptionKamba.style.textAlign = 'center';
-            descriptionKamba.style.float = 'left';
-
-            let helpKamba = document.querySelector('.helpKamba');
-            helpKamba.style.textAlign = 'center';
-
-            let optionHelpKamba1 = document.querySelector('.optionHelpKamba1');
-            optionHelpKamba1.style.fontSize = '0.735rem';
-
-            let optionHelpKamba2 = document.querySelector('.optionHelpKamba2');
-            optionHelpKamba2.style.marginTop = '0.75rem';
-            optionHelpKamba2.style.fontSize = '0.735rem';
-
-            let appLinkKamba = document.querySelector('.appLinkKamba');
-            appLinkKamba.style.textDecoration = 'none';
-            appLinkKamba.style.color = '#3399cc';
-
-            let footerKamba = document.querySelector('.footerKamba');
-            footerKamba.style.width = '90%';
-            footerKamba.style.float = 'left';
-            footerKamba.style.padding = '0 1rem';
-            footerKamba.style.marginTop = '1.5rem';
-
-            let descritionKambaMerchant = document.querySelector('.descritionKambaMerchant');
-            descritionKambaMerchant.style.float = 'left';
-
-            let btnCloseWidgetKamba = document.querySelector('.btnCloseWidgetKamba');
+            let btnCloseWidgetKamba = document.querySelector('.cancelKambaCheckout');
             btnCloseWidgetKamba.title = 'Sair do pagamento';
-            btnCloseWidgetKamba.style.border = 'none';
             btnCloseWidgetKamba.style.cursor = 'pointer';
-            btnCloseWidgetKamba.style.borderRadius = '0.3rem';
-            btnCloseWidgetKamba.style.float = 'right';
-            btnCloseWidgetKamba.style.color = 'red';
 
             btnCloseWidgetKamba.onclick = function(){
               kambaModalContainer.style.display = 'none';
@@ -474,16 +435,11 @@ ready(function() {
               kambaModalContainer.style.display = 'flex';
             };
 
-
             //Function Midia Query - MEDIUM and LARGE
             function midiaMediumDivice(x) {
               if (x.matches) {
-                kambaModalWidget.style.width = '360px';
-                kambaModalWidget.style.height = '475px';
-                partDetailPay.style.width = '100%';
-                partDetailPay.style.float = 'left';
-                descritionKambaMerchant.style.float = 'left';
-                descriptionKamba.style.width = '91%';
+                kambaModalWidget.style.width = '22rem';
+                kambaModalWidget.style.height = '31.2rem';
               }
             }
 
