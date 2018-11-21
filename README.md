@@ -6,13 +6,13 @@ Ofereça pagamentos de produtos ou serviços em seu website.
 
 Com uma única integração, seus clientes poderão realizar pagamentos com a sua carteira via código QR de pagamento ou Botão de pagamento, além de utilizarem seus dados cadastrados para futuras compras. Notificação para lembretes de finalização de compra, levantamento da quantia para sua conta bancária e vários benefícios técnicos e de negócios à longo termo.
 
+## Formas atuais de pagamento
 
-## Pagamento por código QR
+Pagamento via QR Os usuários adicionam produtos para seu carrino, e no checkout escolhem pagar com Kamba como meio de pagamento. Ao clicar "place order" será gerado um código qr que poderá ser escaneado com a carteira Kamba.
 
-O pagamento via código QR é muito útil para comerciantes que desejam receber pagamentos em seu negócio sem a necessidade de cartão. O código QR de pagamento pode ser impresso ou compartilhado para diversos canais sociais o que o torna vantajoso e multicanal.
+Pagamento Web2App Caso os usuários estejam a navegar no smarphone eles não poderão escanear o código QR. Para efectuar o pagamento neste caso o usuário poderá clicar no botão "Pagar com Kamba" para terminar o pagamento com a carteira Kamba.
 
 > Nota: Você acompanha os estados do pagamento, recebe notificações por e-mail e push no seu telemóvel quando pagamentos são bem sucedidos.
-
 
 ## Configuração
 
@@ -28,7 +28,7 @@ Faça a chamada à biblioteca no cabeçalho da sua página Web ou no corpo da p�
 
 ```html
 <head>       
-  <script src="https://cdn.rawgit.com/usekamba/sandbox-kamba-checkout-js/master/kamba-checkout.js" charset="utf-8">	        	</script>
+  <script src="http://comerciante.usekamba.com/checkout/0.0.3/kamba-web-sdk.js" charset="utf-8"></script>
 </head>
 ```
 
@@ -63,8 +63,10 @@ Cole o código Javascrip abaixo dentro da tag html `<body></body>` no corpo da s
 </body>
 ```
 **Configurações API `api_config`:**
-- O campo `environment` define qual ambiente poderá ser usado. 
+- O campo `environment` define qual ambiente poderá ser usado. Durante a fase de desenvolvimento deve-se usar o ambiente ```sandbox``` e quando estiver pronto 
+para production deve-se usar ```production```.
 - Use a chave da API que lhe será enviada para substituir o valor do campo `api_key`. Recomenda-se usar variáveis de ambiente sempre, e não deve ser compartilhada ou exposta em sua página html. 
+NOTE: A chave de API para sandbox e production são diferentes. 
 	
 **Configurações Checkout `checkout_config`:**
 - Para o nosso propósito o valor do campo `channel`, permanecerá igual à **WEB** como no exemplo.
