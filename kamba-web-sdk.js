@@ -161,15 +161,9 @@ ready(function() {
             kambaModalContainer.style.paddingRight = '1rem';
             kambaModalContainer.style.overflow = 'auto';
 
-            var merchantId = data.merchant.id;
-            var checkoutId = data.id;
-            var MOBILE_PATH = ''
-
-            if (getMobileOperatingSystem() == 'Android') {
-              MOBILE_PATH = "https://checkout.usekamba.com/v1/pay?mID="+merchantId+"&chID="+checkoutId+""
-            } else {
-              //IOS URL
-            }
+            let merchantId = data.merchant.id;
+            let checkoutId = data.id;
+            
 
             //Template
             const kambaWidget = `
@@ -216,7 +210,7 @@ ready(function() {
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Abra a sua carteira Kamba e escaneie o código de pagamento.
                       </div>
                       <div class="openAppKamba">
-                        <a href="${MOBILE_PATH}" class="btnKamba">
+                        <a href="https://checkout.usekamba.com/v1/pay?mID=${merchantId}&chID=${checkoutId}" class="btnKamba">
                                     Clica para pagar com Kamba
                                     <img src="https://image.ibb.co/mFZUTz/Pay_Logo_kamba.png" class="btnImgPayKamba">
                                   </a>
@@ -226,12 +220,12 @@ ready(function() {
 
                     <footer class="footerCheckoutKamba">
 
-                      <div>
-                        <img src="https://image.ibb.co/nrFpaL/Logo-small.png" alt="Logo-small" border="0" class="logoUseKamba">
-                      </div>
-
                       <div class="securityPayKamba">
                         <div class="textSecurityPay"><img src="https://image.ibb.co/bxv8MK/icons8_lock_kamba.png" class="lock"> <span class="descriptionSecurityPayKamba">Conexão segura</span></div>
+                      </div>
+
+                      <div>
+                        <img src="https://image.ibb.co/nrFpaL/Logo-small.png" alt="Logo-small" border="0" class="logoUseKamba">
                       </div>
 
                     </footer>
@@ -302,6 +296,7 @@ ready(function() {
               .SvgKambaMerchant {
                 text-align: center;
                 width: 100%;
+                margin-top: 1rem;
               }
 
               .imgQrKambaMerchant {
@@ -322,21 +317,21 @@ ready(function() {
               .optionHelpKamba1 {
                 text-align: center;
                 font-weight: bolder;
-                margin-top: 1rem;
+                margin-top: 2rem;
                 font-size: 0.8rem;
                 padding: 0 1rem;
               }
 
               .footerCheckoutKamba {
-                display: flex;
-                padding: 1rem 1rem 0.5rem 1rem;
+                padding: 1rem 1rem 0 1rem;
+                margin-top: 1rem;
               }
 
               .securityPayKamba {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding-left: 4rem;
+                text-align: center;
               }
 
               .textSecurityPay {
@@ -344,6 +339,7 @@ ready(function() {
                 justify-content: center;
                 align-items: center;
                 box-sizing: border-box;
+                text-align: center;
               }
 
               .descriptionSecurityPayKamba {
@@ -400,9 +396,35 @@ ready(function() {
                 padding: 3rem 1rem 1rem 1rem;
               }
 
+              @media only screen {
+              	 .cancelKambaCheckout {
+                  font-size: 0.8rem;
+                }
+
+                .newTrasactionKamba  {
+                  font-size: 0.8rem;
+                }
+
+                .HowToPayKambaMerchant {
+                  font-size: 0.8rem;
+                }
+              }
+
               @media only screen and (min-width: 40.063em) {
                 .openAppKamba{
                   display: none;
+                }
+
+                 .cancelKambaCheckout {
+                  font-size: 0.88rem;
+                }
+
+                .newTrasactionKamba  {
+                  font-size: 0.88rem;
+                }
+
+                .HowToPayKambaMerchant {
+                  font-size: 0.88rem;
                 }
               }
     
@@ -438,8 +460,8 @@ ready(function() {
             //Function Midia Query - MEDIUM and LARGE
             function midiaMediumDivice(x) {
               if (x.matches) {
-                kambaModalWidget.style.width = '22rem';
-                kambaModalWidget.style.height = '31.2rem';
+                kambaModalWidget.style.width = '23rem';
+                kambaModalWidget.style.height = '34.8rem';
               }
             }
 
