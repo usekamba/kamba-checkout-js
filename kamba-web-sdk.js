@@ -161,15 +161,9 @@ ready(function() {
             kambaModalContainer.style.paddingRight = '1rem';
             kambaModalContainer.style.overflow = 'auto';
 
-            var merchantId = data.merchant.id;
-            var checkoutId = data.id;
-            var MOBILE_PATH = ''
-
-            if (getMobileOperatingSystem() == 'Android') {
-              MOBILE_PATH = "https://checkout.usekamba.com/v1/pay?mID="+merchantId+"&chID="+checkoutId+""
-            } else {
-              //IOS URL
-            }
+            let merchantId = data.merchant.id;
+            let checkoutId = data.id;
+            
 
             //Template
             const kambaWidget = `
