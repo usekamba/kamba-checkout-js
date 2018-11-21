@@ -28,7 +28,7 @@ Faça a chamada à biblioteca no cabeçalho da sua página Web ou no corpo da p�
 
 ```html
 <head>       
-  <script src="http://comerciante.usekamba.com/checkout/0.0.3/kamba-web-sdk.js" charset="utf-8"></script>
+  <script src="http://comerciante.usekamba.com/checkout/0.0.1/kamba-web-sdk.js" charset="utf-8"></script>
 </head>
 ```
 
