@@ -262,8 +262,6 @@ ready(function() {
                   font-weight: bolder;
                   font-size: 0.9rem;
                   text-align: center;
-                  left: -17px;
-                  position: relative;
                 }
 
                 .showBusinessKamba {
