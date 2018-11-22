@@ -204,7 +204,7 @@ ready(function() {
                         </div>
 
                         <div class="optionHelpKamba1">
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Abra a sua carteira Kamba e escaneie o código de pagamento.
+                          Abra a sua carteira Kamba e escaneie o código de pagamento.
                         </div>
                         <div class="openAppKamba">
                           <a href="https://checkout.usekamba.com/v1/pay?mID=${merchantId}&chID=${checkoutId}" class="btnKamba">
@@ -235,7 +235,7 @@ ready(function() {
                 .kambaModalWidget {
                   overflow: auto;
                   background: #fff;
-                  fontFamily: 'Montserrat', sans-serif;
+                  font-family: Montserrat, sans-serif;
                   fontSize: 0.85rem;
                   width: 100% !important;
                   height: 100% !important;
@@ -298,7 +298,6 @@ ready(function() {
                   color: rgb(105, 105, 105);
                   font-weight: bolder;
                   font-size: 0.85rem;
-                  text-align: justify;
                 }
 
                 .qrPartKambaMerchant {
@@ -322,7 +321,7 @@ ready(function() {
                 }
 
                 .textValidatKambaMerchant {
-                  font-size: 0.8rem;
+                  font-size: 0.7rem;
                   font-weight: bolder;
                   color: rgb(105, 105, 105);
                 }
@@ -333,7 +332,7 @@ ready(function() {
                   margin-top: 2rem;
                   font-size: 0.9rem;
                   padding: 0 1rem;
-                  text-align: justify;
+                  text-align: center;
                 }
 
                 .footerCheckoutKamba {
