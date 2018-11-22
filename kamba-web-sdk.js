@@ -86,7 +86,6 @@ ready(function() {
         kambaModalProgressBarTemplate.style.justifyContent = 'center';
         kambaModalProgressBarTemplate.style.alignItems = 'center';
         kambaModalProgressBarTemplate.style.boxSizing = 'border-box';
-        kambaModalProgressBarTemplate.style.paddingRight = '1rem';
         kambaModalProgressBarTemplate.style.overflow = 'auto';
         kambaModalProgressBarTemplate.style.color = '#ffffff';
 
@@ -132,343 +131,327 @@ ready(function() {
 
         }).then(function(response) {
 
-          if (response.ok) {
-            response.json().then(data => {
-            kambaModalProgressBarTemplate.style.display = 'none';
+            if (response.ok) {
+              response.json().then(data => {
+              kambaModalProgressBarTemplate.style.display = 'none';
 
-            //To transform
-            let initial_amount = new Number(data.initial_amount);
-            let total_amount = new Number(data.total_amount);
+              //To transform
+              let initial_amount = new Number(data.initial_amount);
+              let total_amount = new Number(data.total_amount);
 
-            let dateConvert = new Date(data.expires_at);
-            let newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes()].join(':');
+              let dateConvert = new Date(data.expires_at);
+              let newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes()].join(':');
 
-            const mainKambaModalContainer = document.createElement('main');
-            //Modal Container
-            var kambaModalContainer = document.getElementsByTagName('body')[0].appendChild(mainKambaModalContainer);
-            kambaModalContainer.classList.add('kambaModalContainer');
-            kambaModalContainer.style.width = '100vw';
-            kambaModalContainer.style.height = '100%';
-            kambaModalContainer.style.background = 'rgba(0,0,0,.25)';
-            kambaModalContainer.style.position = 'fixed';
-            kambaModalContainer.style.top = '0';
-            kambaModalContainer.style.left = '0';
-            kambaModalContainer.style.zIndex = '1000000000000000000000';
-            kambaModalContainer.style.display = 'flex';
-            kambaModalContainer.style.justifyContent = 'center';
-            kambaModalContainer.style.alignItems = 'center';
-            kambaModalContainer.style.boxSizing = 'border-box';
-            kambaModalContainer.style.paddingRight = '1rem';
-            kambaModalContainer.style.overflow = 'auto';
+              const mainKambaModalContainer = document.createElement('main');
+              //Modal Container
+              let kambaModalContainer = document.getElementsByTagName('body')[0].appendChild(mainKambaModalContainer);
+              kambaModalContainer.classList.add('kambaModalContainer');
+              kambaModalContainer.style.width = '100vw';
+              kambaModalContainer.style.height = '100%';
+              kambaModalContainer.style.background = 'rgba(0,0,0,.25)';
+              kambaModalContainer.style.position = 'fixed';
+              kambaModalContainer.style.top = '0';
+              kambaModalContainer.style.left = '0';
+              kambaModalContainer.style.zIndex = '1000000000000000000000';
+              kambaModalContainer.style.display = 'flex';
+              kambaModalContainer.style.justifyContent = 'center';
+              kambaModalContainer.style.alignItems = 'center';
+              kambaModalContainer.style.boxSizing = 'border-box';
+              kambaModalContainer.style.overflow = 'auto';
 
-            let merchantId = data.merchant.id;
-            let checkoutId = data.id;
-            
+              let merchantId = data.merchant.id;
+              let checkoutId = data.id;
+              
 
-            //Template
-            const kambaWidget = `
+              //Template
+              const kambaWidget = `
 
-            <div class="kambaModalWidget">
+              <div class="kambaModalWidget">
 
-                <header class="checkoutHeader">
-                  <div class="cancelKambaCheckout">Cancelar</div>
-                  <div class="newTrasactionKamba">Nova transação</div>
-                  <div class="HowToPayKambaMerchant">Como pagar?</div>
-                </header>
+                  <header class="checkoutHeader">
+                    <div class="cancelKambaCheckout">Cancelar</div>
+                    <div class="newTrasactionKamba">Nova transação</div>
+                  </header>
 
-                <section>
+                  <section>
 
-                    <article class="showBusinessKamba">
-                      <div>
-                        <img src="https://image.ibb.co/gJm1pf/Loja-small.png" alt="Loja-small" border="0" class="imgShopBusinessKamba">
-                      </div>
+                      <article class="showBusinessKamba">
+                        <div>
+                          <img src="https://image.ibb.co/gJm1pf/Loja-small.png" alt="Loja-small" border="0" class="imgShopBusinessKamba">
+                        </div>
 
-                      <div class="descriptionBusinessKamba">
-                        <div class="descritionKambaMerchant">${data.merchant.business_name}</div>
-                        <div class="priceProductKambaMerchant">${total_amount.toLocaleString('pt-ao', {style: 'currency', currency: 'AKZ'})}</div>
-                      </div>
-                    </article>
+                        <div class="descriptionBusinessKamba">
+                          <div class="descritionKambaMerchant">${data.merchant.business_name}</div>
+                          <div class="priceProductKambaMerchant">${total_amount.toLocaleString('pt-ao', {style: 'currency', currency: 'AKZ'})}</div>
+                        </div>
+                      </article>
 
-                    <hr>
+                      <hr>
 
-                    <div class="nameProductKambaMerchant">${data.notes}</div>
+                      <div class="nameProductKambaMerchant">${data.notes}</div>
 
-                    <article class="qrPartKambaMerchant">
-                     
-                      <div class="SvgKambaMerchant">
+                      <article class="qrPartKambaMerchant">
+                      
+                        <div class="SvgKambaMerchant">
 
-                          <svg viewBox="0 0 670 670" preserveAspectRatio="xMidYMid meet" class="imgQrKambaMerchant">
-                              ${data.qr_code}
-                          </svg>
+                            <svg viewBox="0 0 670 670" preserveAspectRatio="xMidYMid meet" class="imgQrKambaMerchant">
+                                ${data.qr_code}
+                            </svg>
 
-                          <div class="textValidatKambaMerchant">
-                            Expira em ${newDateConvert}
-                          </div>
-                      </div>
+                            <div class="textValidatKambaMerchant">
+                              Expira em ${newDateConvert}
+                            </div>
+                        </div>
 
-                      <div class="optionHelpKamba1">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Abra a sua carteira Kamba e escaneie o código de pagamento.
-                      </div>
-                      <div class="openAppKamba">
-                        <a href="https://checkout.usekamba.com/v1/pay?mID=${merchantId}&chID=${checkoutId}" class="btnKamba">
-                                    Clica para pagar com Kamba
-                                    <img src="https://image.ibb.co/mFZUTz/Pay_Logo_kamba.png" class="btnImgPayKamba">
-                                  </a>
-                      </div>
+                        <div class="optionHelpKamba1">
+                          Abra a sua carteira Kamba e escaneie o código de pagamento.
+                        </div>
+                        <div class="openAppKamba">
+                          <a href="https://checkout.usekamba.com/v1/pay?mID=${merchantId}&chID=${checkoutId}" class="btnKamba">
+                                      Clica para pagar com Kamba
+                                      <img src="https://image.ibb.co/mFZUTz/Pay_Logo_kamba.png" class="btnImgPayKamba">
+                                    </a>
+                        </div>
 
-                    </article>
+                      </article>
 
-                    <footer class="footerCheckoutKamba">
+                      <footer class="footerCheckoutKamba">
 
-                      <div class="securityPayKamba">
-                        <div class="textSecurityPay"><img src="https://image.ibb.co/bxv8MK/icons8_lock_kamba.png" class="lock"> <span class="descriptionSecurityPayKamba">Conexão segura</span></div>
-                      </div>
+                        <div class="securityPayKamba">
+                          <div class="textSecurityPay"><img src="https://image.ibb.co/bxv8MK/icons8_lock_kamba.png" class="lock"> <span class="descriptionSecurityPayKamba">Conexão segura</span></div>
+                        </div>
 
-                      <div>
-                        <img src="https://image.ibb.co/nrFpaL/Logo-small.png" alt="Logo-small" border="0" class="logoUseKamba">
-                      </div>
+                        <div>
+                          <img src="https://image.ibb.co/nrFpaL/Logo-small.png" alt="Logo-small" border="0" class="logoUseKamba">
+                        </div>
 
-                    </footer>
+                      </footer>
 
-                </section>
-            </div>
+                  </section>
+              </div>
 
-            <style>
+              <style>
 
-              .checkoutHeader {
-                background: #01ff5e;
-                height: 1rem;
-                color: #fff;
-                font-size: 1rem;
-                padding: 1rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              }
+                .kambaModalWidget {
+                  overflow: auto;
+                  background: #fff;
+                  font-family: Montserrat, sans-serif;
+                  fontSize: 0.85rem;
+                  width: 100% !important;
+                  height: 100% !important;
+                }
 
-              .cancelKambaCheckout {
-                cursor: pointer;
-                margin-right: 1rem;
-              }
+                .checkoutHeader {
+                  background: #01ff5e;
+                  height: 1rem;
+                  color: #fff;
+                  font-size: 1rem;
+                  padding: 1rem;
+                  justify-content: center;
+                  align-items: center;
+                }
 
-              .newTrasactionKamba  {
-                font-weight: bolder;
-                margin-right: 1rem;
-              }
-
-              .showBusinessKamba {
-                padding: 1.2rem 1rem 0 1rem;
-                display: flex;
-              }
-
-              .imgShopBusinessKamba {
-                width: 88%;
-                height: 91%;
-              }
-
-              .descriptionBusinessKamba{
-                margin-left: 0.5rem;
-              }
-
-              .descritionKambaMerchant {     
-                font-size: 0.9rem;
-                font-weight: bolder;
-                color: rgb(105, 105, 105);
-                margin-bottom: 0.5rem;
-              }
-
-              .priceProductKambaMerchant {
-                font-size: 1.1rem;
-                font-weight: bolder;
-              }
-
-              .nameProductKambaMerchant {
-                padding: 0.5rem 1rem;
-                color: rgb(105, 105, 105);
-                font-weight: bolder;
-              }
-
-              .qrPartKambaMerchant {
-                width: 100%;
-                position: relative;
-              }
-
-              .SvgKambaMerchant {
-                text-align: center;
-                width: 100%;
-                margin-top: 1rem;
-              }
-
-              .imgQrKambaMerchant {
-                width: 41%;
-                height: 41%;
-                text-align: center;
-                border: 2px solid #000;
-                padding: 0.2rem;
-                margin: 0.5rem 0;
-              }
-
-              .textValidatKambaMerchant {
-                font-size: 0.7rem;
-                font-weight: bolder;
-                color: rgb(105, 105, 105);
-              }
-
-              .optionHelpKamba1 {
-                text-align: center;
-                font-weight: bolder;
-                margin-top: 2rem;
-                font-size: 0.8rem;
-                padding: 0 1rem;
-              }
-
-              .footerCheckoutKamba {
-                padding: 1rem 1rem 0 1rem;
-                margin-top: 1rem;
-              }
-
-              .securityPayKamba {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-              }
-
-              .textSecurityPay {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                box-sizing: border-box;
-                text-align: center;
-              }
-
-              .descriptionSecurityPayKamba {
-                margin-left: 0.2rem;
-                color: #000;
-                font-size: 0.8rem;
-                font-weight: bolder;
-              }
-
-              @-moz-document url-prefix() {
                 .cancelKambaCheckout {
-                  font-size: 0.88rem;
+                  cursor: pointer;
+                  float: left;
+                  font-size: 0.9rem;
+                  margin-right: -2rem;
                 }
 
                 .newTrasactionKamba  {
-                  font-size: 0.88rem;
+                  font-weight: bolder;
+                  font-size: 0.9rem;
+                  text-align: center;
+                  left: -17px;
+                  position: relative;
                 }
 
-                .HowToPayKambaMerchant {
-                  font-size: 0.88rem;
+                .showBusinessKamba {
+                  padding: 1.2rem 1rem 0 1rem;
+                  display: flex;
                 }
 
-                .optionHelpKamba1 {
-                  font-size: 0.8rem;
+                .imgShopBusinessKamba {
+                  width: 88%;
+                  height: 88%;
+                }
+
+                .descriptionBusinessKamba{
+                  margin-left: 0.5rem;
+                }
+
+                .descritionKambaMerchant {     
+                  font-size: 0.9rem;
+                  font-weight: bolder;
+                  color: rgb(105, 105, 105);
+                  margin-bottom: 0.5rem;
+                }
+
+                .priceProductKambaMerchant {
+                  font-size: 1rem;
+                  font-weight: bolder;
+                }
+
+                hr {
+                  border: 0.5px solid #ccc;
+                }
+
+                .nameProductKambaMerchant {
+                  padding: 0.5rem 1rem;
+                  color: rgb(105, 105, 105);
+                  font-weight: bolder;
+                  font-size: 0.85rem;
+                }
+
+                .qrPartKambaMerchant {
+                  width: 100%;
+                  position: relative;
+                }
+
+                .SvgKambaMerchant {
+                  text-align: center;
+                  width: 100%;
+                  margin-top: 0.5rem;
+                }
+
+                .imgQrKambaMerchant {
+                  width: 41%;
+                  height: 41%;
+                  text-align: center;
+                  border: 2px solid #000;
+                  padding: 0.2rem;
+                  margin: 0.5rem 0;
                 }
 
                 .textValidatKambaMerchant {
-                font-size: 0.6rem;
+                  font-size: 0.7rem;
+                  font-weight: bolder;
+                  color: rgb(105, 105, 105);
                 }
 
-              }
+                .optionHelpKamba1 {
+                  text-align: center;
+                  font-weight: bolder;
+                  margin-top: 2rem;
+                  font-size: 0.9rem;
+                  padding: 0 1rem;
+                  text-align: center;
+                }
 
-              a.btnKamba {
-                background-image: linear-gradient(to left, rgb(0, 255, 179), rgb(0, 255, 95))!important;
-                padding: 0.5rem;
-                cursor: pointer;
-                font-size: 0.9rem;
-                border-radius: 0.3rem;
-                font-family: Montserrat, sans-serif;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-decoration: none;
-                color: #000;
-              }
+                .footerCheckoutKamba {
+                  padding: 1rem 1rem 0 1rem;
+                  margin-top: 1rem;
+                }
 
-              .btnImgPayKamba {
-                width: 15%;
-                height: 15%;
-                margin-left: 0.5rem;
-              }
+                .securityPayKamba {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  text-align: center;
+                }
 
-              .openAppKamba {
-                padding: 3rem 1rem 1rem 1rem;
-              }
+                .textSecurityPay {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  box-sizing: border-box;
+                  text-align: center;
+                }
 
-              @media only screen {
-              	 .cancelKambaCheckout {
+                .descriptionSecurityPayKamba {
+                  margin-left: 0.2rem;
+                  color: #000;
                   font-size: 0.8rem;
+                  font-weight: bolder;
                 }
 
-                .newTrasactionKamba  {
-                  font-size: 0.8rem;
+                @-moz-document url-prefix() {
+                  .cancelKambaCheckout {
+                    font-size: 0.88rem;
+                  }
+
+                  .newTrasactionKamba  {
+                    font-size: 0.88rem;
+                  }
+
+                  .HowToPayKambaMerchant {
+                    font-size: 0.88rem;
+                  }
+
+                  .optionHelpKamba1 {
+                    font-size: 0.8rem;
+                  }
+
+                  .textValidatKambaMerchant {
+                  font-size: 0.6rem;
+                  }
+
                 }
 
-                .HowToPayKambaMerchant {
-                  font-size: 0.8rem;
-                }
-              }
-
-              @media only screen and (min-width: 40.063em) {
-                .openAppKamba{
-                  display: none;
-                }
-
-                 .cancelKambaCheckout {
-                  font-size: 0.88rem;
-                }
-
-                .newTrasactionKamba  {
-                  font-size: 0.88rem;
+                a.btnKamba {
+                  background-image: linear-gradient(to left, rgb(0, 255, 179), rgb(0, 255, 95))!important;
+                  padding: 0.5rem;
+                  cursor: pointer;
+                  font-size: 0.9rem;
+                  border-radius: 0.3rem;
+                  font-family: Montserrat, sans-serif;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  text-decoration: none;
+                  color: #000;
                 }
 
-                .HowToPayKambaMerchant {
-                  font-size: 0.88rem;
+                .btnImgPayKamba {
+                  width: 15%;
+                  height: 15%;
+                  margin-left: 0.5rem;
                 }
-              }
-    
-            </style>
-            `
-            kambaModalContainer.innerHTML = kambaWidget;
 
-            //Style Widget Modal
-            const kambaModalWidget = document.querySelector('main .kambaModalWidget');
-            kambaModalWidget.style.borderRadius = '0.5rem';
-            kambaModalWidget.style.overflow = 'auto';
-            kambaModalWidget.style.background = '#fff';
-            kambaModalWidget.style.width = '100%';
-            kambaModalWidget.style.height = '100%';
-            kambaModalWidget.style.position = 'absolute';
-            kambaModalWidget.style.fontFamily = "'Montserrat', sans-serif";
-            kambaModalWidget.style.fontSize = '0.85rem';
-            kambaModalWidget.style.boxShadow = '0 5px 8px 0 rgba(0,0,0,.2), 0 7px 20px 0 rgba(0,0,0,.10)';
+                .openAppKamba {
+                  padding: 3rem 1rem 1rem 1rem;
+                }
 
-            let btnCloseWidgetKamba = document.querySelector('.cancelKambaCheckout');
-            btnCloseWidgetKamba.title = 'Sair do pagamento';
-            btnCloseWidgetKamba.style.cursor = 'pointer';
+                @media only screen and (min-width: 40.063em) {
+                  .kambaModalWidget {
+                    width: 22rem !important;
+                    height: 34rem !important;
+                    border-radius: 0.5rem;
+                    box-shadow: 0 5px 8px 0 rgba(0,0,0,.2), 0 7px 20px 0 rgba(0,0,0,.10);
+                  }
 
-            btnCloseWidgetKamba.onclick = function(){
-              kambaModalContainer.style.display = 'none';
-            };
+                  .openAppKamba{
+                    display: none;
+                  }
 
-            //Button for Pay Kamba
-            document.querySelector('.btnOpenWidgetKamba').onclick = function(){
-              kambaModalContainer.style.display = 'flex';
-            };
+                  .cancelKambaCheckout {
+                    font-size: 1rem;
+                  }
 
-            //Function Midia Query - MEDIUM and LARGE
-            function midiaMediumDivice(x) {
-              if (x.matches) {
-                kambaModalWidget.style.width = '23rem';
-                kambaModalWidget.style.height = '34.8rem';
-              }
-            }
+                  .newTrasactionKamba  {
+                    font-size: 1rem;
+                  }
 
-            let x = window.matchMedia("(min-width: 641px)")
-            midiaMediumDivice(x)
-            x.addListener(midiaMediumDivice)
+                }
+      
+              </style>
+              `
+              kambaModalContainer.innerHTML = kambaWidget;
+              
+              let btnCloseWidgetKamba = document.querySelector('.cancelKambaCheckout');
+              btnCloseWidgetKamba.title = 'Sair do pagamento';
+              btnCloseWidgetKamba.style.cursor = 'pointer';
 
+              btnCloseWidgetKamba.onclick = function(){
+                kambaModalContainer.style.display = 'none';
+              };
+
+              //Button for Pay Kamba
+              document.querySelector('.btnOpenWidgetKamba').onclick = function(){
+                kambaModalContainer.style.display = 'flex';
+              };
+
+  
             });
 
           } else {
