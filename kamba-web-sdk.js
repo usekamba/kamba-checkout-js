@@ -412,7 +412,7 @@ ready(function() {
                 @media only screen and (min-width: 40.063em) {
                   .kambaModalWidget {
                     width: 22rem !important;
-                    height: 34.5rem !important;
+                    height: 34rem !important;
                     border-radius: 0.5rem;
                     box-shadow: 0 5px 8px 0 rgba(0,0,0,.2), 0 7px 20px 0 rgba(0,0,0,.10);
                   }
