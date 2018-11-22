@@ -255,12 +255,13 @@ ready(function() {
                   cursor: pointer;
                   float: left;
                   font-size: 0.9rem;
+                  margin-right: -2rem;
                 }
 
                 .newTrasactionKamba  {
                   font-weight: bolder;
-                  float: right;
                   font-size: 0.9rem;
+                  text-align: center;
                 }
 
                 .showBusinessKamba {
