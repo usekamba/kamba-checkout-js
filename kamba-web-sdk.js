@@ -207,7 +207,7 @@ ready(function() {
                           Abra a sua carteira Kamba e escaneie o código de pagamento.
                         </div>
                         <div class="openAppKamba">
-                          <a href="https://usekamba.page.link/?link=https://www.usekamba.com/&apn=com.usekamba.kamba.kamba&ibi=com.usekamba.kamba&mID=${merchantId}&chID=${checkoutId}" class="btnKamba">
+                          <a href="https://usekamba.page.link/?link=https://www.usekamba.com/pay?chID=${checkoutId}&apn=com.usekamba.kamba.kamba&ibi=com.usekamba.kamba" class="btnKamba">
                                       Clica para pagar com Kamba
                                       <img src="https://image.ibb.co/mFZUTz/Pay_Logo_kamba.png" class="btnImgPayKamba">
                                     </a>
