@@ -4,7 +4,6 @@ curl -X POST \
   https://API-URL/checkouts \
   -H 'authorization: Token SUA_CHAVE_DA_API' \
   -H 'content-type: application/json' \
-  -H 'postman-token: 0342fa24-cbba-f706-8ade-e19017b061c5' \
   -H 'signature: fNrnAwHhSmEB+SkCQlGZUm4+VyQ=' \
   -H 'time: Wed, 19 Dec 2018 10:01:43 GMT' \
   -d '{
