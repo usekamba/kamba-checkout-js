@@ -2,12 +2,12 @@ Post exemplo:
 ```sh
 curl -X POST \
   https://API-URL/checkouts \
-  -H 'authorization: Token uaS7FnerY3iCiCDGKXgKTgtt' \
+  -H 'authorization: Token SUA_CHAVE_DA_API' \
   -H 'content-type: application/json' \
   -H 'postman-token: 0342fa24-cbba-f706-8ade-e19017b061c5' \
   -H 'signature: fNrnAwHhSmEB+SkCQlGZUm4+VyQ=' \
   -H 'time: Wed, 19 Dec 2018 10:01:43 GMT' \
-  -d '{ 
+  -d '{
   "channel": "WEB",
   "initial_amount": 5500,
   "notes": "Alguma note exemplo.",
@@ -112,14 +112,14 @@ canonical_string = "{http-method},{content-Type},{body-md5},{endpoint-uri},{time
 Exemplo: "POST,application/json,/WaMa6Hp0P90XRLMKl2IAQ==,/v1/checkouts,Wed, 19 Dec 2018 11:48:48 GMT"
 ```
 
-* http-method - representa o métedo http da requisição
+* http-method - representa o método http da requisição
 * content-Type - application/json
 * body-md5 - representa a string md5 calculada a partir do json do body em forma de string.
 * endpoint-uri - /v1/checkouts
-* time - representa o tempo em que a requisição foi gerada, o mesmo valor presente na key time
+* time - representa o tempo em que a requisição foi gerada, no formato RFC 2616, o mesmo valor presente na key time
 
 
-Json em forma de string: 
+Json em forma de string:
 ```
 "{"channel":"WEB","initial_amount":5500,"notes":"Alguma note exemplo.","redirect_url_success":"http://amarildolucas.com/curso/aplicativo-movel-com-swift/sucesso"}"
 ```
