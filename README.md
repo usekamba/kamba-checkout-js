@@ -50,7 +50,9 @@ Cole o código Javascrip abaixo dentro da tag html `<body></body>` no corpo da s
     function start_payment() {
       kamba(api_config = {
 	  environment: 'sandbox',
-	  api_key: 'SUA_CHAVE_DA_API'
+    api_key: 'SUA_CHAVE_DA_API',
+    checkout_time: 'TEMPO_EM_QUE_FOI_CRIADO_O_CHECKOUT(FORMATO_RFC 2616)',
+		checkout_signature: 'ASSINATURA_DO_CHECKOUT'
 	},
 	checkout_config = { 
 	  channel: 'WEB',
@@ -67,6 +69,8 @@ Cole o código Javascrip abaixo dentro da tag html `<body></body>` no corpo da s
 para production deve-se usar ```production```.
 - Use a chave da API que lhe será enviada para substituir o valor do campo `api_key`. Recomenda-se usar variáveis de ambiente sempre, e não deve ser compartilhada ou exposta em sua página html. 
 NOTE: A chave de API para sandbox e production são diferentes. 
+- Campo `checkout_time` recebe o tempo em que a requisição está sendo gerada, no formato RFC 2616.
+- Campo `checkout_signature` recebe o valor da assinatura do checkout que poderá ser gerada.
 	
 **Configurações Checkout `checkout_config`:**
 - Para o nosso propósito o valor do campo `channel`, permanecerá igual à **WEB** como no exemplo.

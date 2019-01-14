@@ -118,7 +118,9 @@ ready(function() {
         fetch(url, {method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'authorization': token.concat(api_config.api_key)
+            'authorization': token.concat(api_config.api_key),
+            'signature': api_config.checkout_signature,
+            'time': api_config.checkout_time
           },
           body:  JSON.stringify({
             channel: checkout_config.channel,
@@ -465,6 +467,10 @@ ready(function() {
 
               if ((typeof data.errors.code !== 'undefined')) {
                 textErrorKamba.innerHTML =  `<p>${data.errors.message} </p>`;
+              }
+
+              if ((typeof data.errors[0] !== 'undefined')) {
+                textErrorKamba.innerHTML =  `<p>${data.errors[0].message} </p>`;
               }
             });
           }
