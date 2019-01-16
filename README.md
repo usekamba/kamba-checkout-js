@@ -49,10 +49,10 @@ Cole o código Javascrip abaixo dentro da tag html `<body></body>` no corpo da s
   <script type="text/javascript">
     function start_payment() {
       kamba(api_config = {
-	  environment: 'sandbox',
-    api_key: 'SUA_CHAVE_DA_API',
-    checkout_time: 'TEMPO_EM_QUE_FOI_CRIADO_O_CHECKOUT(FORMATO_RFC 2616)',
-		checkout_signature: 'ASSINATURA_DO_CHECKOUT'
+      environment: 'sandbox',
+      api_key: 'SUA_CHAVE_DA_API',
+      checkout_time: new Date().toUTCString(),
+      checkout_signature: 'ASSINATURA_DO_CHECKOUT'
 	},
 	checkout_config = { 
 	  channel: 'WEB',

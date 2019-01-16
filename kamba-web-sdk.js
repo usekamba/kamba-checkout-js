@@ -110,7 +110,9 @@ ready(function() {
         const token = 'Token ';
 
         if (api_config.environment == 'sandbox') {
-          url = 'https://sandbox.usekamba.com/v1/checkouts/';
+          //url = 'https://sandbox.usekamba.com/v1/checkouts/';
+          url = 'https://kamba-api-staging.herokuapp.com/v1/checkouts';
+          
         } else {
           url = 'https://api.usekamba.com/v1/checkouts/';
         }
