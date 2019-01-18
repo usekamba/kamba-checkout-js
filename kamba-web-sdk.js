@@ -110,9 +110,7 @@ ready(function() {
         const token = 'Token ';
 
         if (api_config.environment == 'sandbox') {
-          //url = 'https://sandbox.usekamba.com/v1/checkouts/';
-          url = 'https://kamba-api-staging.herokuapp.com/v1/checkouts';
-          
+          url = 'https://sandbox.usekamba.com/v1/checkouts/';  
         } else {
           url = 'https://api.usekamba.com/v1/checkouts/';
         }
@@ -122,7 +120,7 @@ ready(function() {
             'Content-Type': 'application/json',
             'authorization': token.concat(api_config.api_key),
             'signature': api_config.checkout_signature,
-            'time': api_config.checkout_time
+            'time': new Date().toUTCString()
           },
           body:  JSON.stringify({
             channel: checkout_config.channel,
