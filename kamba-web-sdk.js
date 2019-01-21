@@ -119,8 +119,7 @@ ready(function() {
           headers: {
             'Content-Type': 'application/json',
             'authorization': token.concat(api_config.api_key),
-            'signature': api_config.checkout_signature,
-            'time': new Date().toUTCString()
+            'signature': api_config.checkout_signature
           },
           body:  JSON.stringify({
             channel: checkout_config.channel,
