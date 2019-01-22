@@ -110,7 +110,7 @@ ready(function() {
         const token = 'Token ';
 
         if (api_config.environment == 'sandbox') {
-          url = 'https://sandbox.usekamba.com/v1/checkouts/';
+          url = 'https://sandbox.usekamba.com/v1/checkouts/';  
         } else {
           url = 'https://api.usekamba.com/v1/checkouts/';
         }
@@ -118,7 +118,8 @@ ready(function() {
         fetch(url, {method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'authorization': token.concat(api_config.api_key)
+            'authorization': token.concat(api_config.api_key),
+            'signature': api_config.checkout_signature
           },
           body:  JSON.stringify({
             channel: checkout_config.channel,
@@ -465,6 +466,10 @@ ready(function() {
 
               if ((typeof data.errors.code !== 'undefined')) {
                 textErrorKamba.innerHTML =  `<p>${data.errors.message} </p>`;
+              }
+
+              if ((typeof data.errors[0] !== 'undefined')) {
+                textErrorKamba.innerHTML =  `<p>${data.errors[0].message} </p>`;
               }
             });
           }
