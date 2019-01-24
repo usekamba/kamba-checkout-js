@@ -195,7 +195,7 @@ ready(function() {
                       
                         <div class="SvgKambaMerchant">
 
-                            <svg viewBox="0 0 670 670" preserveAspectRatio="xMidYMid meet" class="imgQrKambaMerchant">
+                            <svg viewBox="0 0 625 625" preserveAspectRatio="xMidYMid meet" class="imgQrKambaMerchant">
                                 ${data.qr_code}
                             </svg>
 
@@ -244,7 +244,7 @@ ready(function() {
 
                 .checkoutHeader {
                   background: #01ff5e;
-                  height: 1rem;
+                  height: 3rem;
                   color: #fff;
                   font-size: 1rem;
                   padding: 1rem;
@@ -271,7 +271,7 @@ ready(function() {
                 }
 
                 .imgShopBusinessKamba {
-                  width: 88%;
+                  width: 80%;
                   height: 88%;
                 }
 
@@ -296,7 +296,7 @@ ready(function() {
                 }
 
                 .nameProductKambaMerchant {
-                  padding: 0.5rem 1rem;
+                  padding: 0 1rem;
                   color: rgb(105, 105, 105);
                   font-weight: bolder;
                   font-size: 0.85rem;
@@ -332,7 +332,7 @@ ready(function() {
                   text-align: center;
                   font-weight: bolder;
                   margin-top: 2rem;
-                  font-size: 0.9rem;
+                  font-size: 0.8rem;
                   padding: 0 1rem;
                   text-align: center;
                 }
@@ -385,6 +385,11 @@ ready(function() {
                   font-size: 0.6rem;
                   }
 
+                }
+
+                .logoUseKamba {
+                  width: 7%;
+                  height: 7%;
                 }
 
                 a.btnKamba {
