@@ -80,7 +80,7 @@ NOTE: A chave de API para sandbox e production são diferentes.
 
  ## Geração de assinaturas
 
-Por questões de segurança no processo de integração com o `Checkout Js` é necessário gerar uma assinatura que poderá ser passada para preencher o valor do campo `checkout_signature`. Esta assinatura poderá ser gerada usando uma linguagem de programação *Server Side* (Php, Java, Python, Ruby...) utilizada na própria página do comerciante que deseja integrar o Checkout Js.
+Por questões de segurança no processo de integração com o `Checkout Js` é necessário gerar uma assinatura que poderá ser passada para preencher o valor do campo `checkout_signature`. Esta assinatura poderá ser gerada usando uma linguagem de programação *Server Side* (Php, Java, Python, Ruby...) utilizada na própria página que deseja-se integrar o Checkout Js.
 
 > **Selecione uma Linguagem de Programação a baixo e veja como gerar a assinatura usando esta linguagem:**
 
