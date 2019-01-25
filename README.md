@@ -66,6 +66,7 @@ Em algum lugar no corpo da sua página, você deverá adicionar um botão que pe
 </body>
 ```
 **Configurações do `api_config`:**
+
 | Atributo        | Descrição         |
 | ------------- |:-------------:|
 | `environment`      | O campo `environment` define qual ambiente poderá ser usado. Durante a fase de desenvolvimento deve-se usar o ambiente ```sandbox``` e quando estiver pronto para produção deve-se usar ```production```.  |
@@ -73,6 +74,7 @@ Em algum lugar no corpo da sua página, você deverá adicionar um botão que pe
 | `checkout_signature`        | Campo `checkout_signature` recebe o valor da assinatura do checkout gerada através de um algoritmo de mensagem-assinatura.        |
 
 **Configurações do `checkout_config`:**
+
 | Atributo        | Descrição         |
 | ------------- |:-------------:|
 | `channel`      | Para o nosso propósito o valor do campo `channel`, permanecerá igual à **WEB** como no exemplo. |
