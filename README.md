@@ -16,7 +16,7 @@ Pagamento Web2App Caso os usuários estejam a navegar no smarphone eles não pod
 
 ## Configuração
 
-Crie uma conta em <http://comerciante.usekamba.com/> para obter o registro como comerciante e no menu do painel clique na opção `Integrações`. Copie a sua chave de API `api_key` e outras configurações necessárias para integrar o Checkout Js.
+Crie uma conta em https://comerciante.usekamba.com/criar-conta para obter o registro como comerciante e no menu do painel clique na opção `Integrações`. Copie a sua chave de API `api_key` e outras configurações necessárias para integrar o Checkout Js.
 
 Não há necessidade de clonar o repositório ou baixar arquivos para sua máquina – basta fazer uma chamada para a biblioteca javascript no cabeçalho da sua página Web `<head></head>`, e adicionar algumas linhas de código no corpo da sua página `<body></body>`. 
 
