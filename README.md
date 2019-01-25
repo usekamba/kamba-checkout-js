@@ -1,39 +1,42 @@
-# Integração da Biblioteca Kamba Checkout Web
+# Integração da Biblioteca Kamba Checkout
 
-> Nota: Esta biblioteca está em fase beta e em desenvolvimento contínuo. Se você encontrar algum erro, crie uma issue para que ela seja corrigida o mais rápido possível.
+> **Nota:** Esta biblioteca está em **fase beta** e em desenvolvimento contínuo, mas completamente funcional em lojas online. Nos envie feedback ao abrir uma issue diretamente aqui mesmo no Github.
 
-Ofereça pagamentos de produtos ou serviços em seu website.
+**Ofereça pagamentos de produtos ou serviços em seu website.**
 
-Com uma única integração, seus clientes poderão realizar pagamentos com a sua carteira via código QR de pagamento ou Botão de pagamento, além de utilizarem seus dados cadastrados para futuras compras. Notificação para lembretes de finalização de compra, levantamento da quantia para sua conta bancária e vários benefícios técnicos e de negócios à longo termo.
+Com uma única **integração multicanal**, seus clientes poderão realizar pagamentos com a carteira móvel via código QR de pagamento ou Botão de pagamento, além de utilizarem seus dados cadastrados para futuras compras. Notificação para lembretes de finalização de compra, levantamento da quantia para sua conta bancária e vários benefícios técnicos e de negócios à longo termo.
 
-## Formas atuais de pagamento
+## Formas de pagamento
 
-Pagamento via QR Os usuários adicionam produtos para seu carrino, e no checkout escolhem pagar com Kamba como meio de pagamento. Ao clicar "place order" será gerado um código qr que poderá ser escaneado com a carteira Kamba.
+**Pagamento via QR:** Os usuários adicionam produtos para o carrino de compras da loja, e no checkout escolhem **pagar com Kamba** como meio de pagamento. Ao clicar em Finalizar Compra será gerado um código qr que poderá ser escaneado com a carteira móvel.
 
-Pagamento Web2App Caso os usuários estejam a navegar no smarphone eles não poderão escanear o código QR. Para efectuar o pagamento neste caso o usuário poderá clicar no botão "Pagar com Kamba" para terminar o pagamento com a carteira Kamba.
+> **Nota:** O pagamento QR também funciona In-Store (dentro da loja física) do comerciante.
 
-> Nota: Você acompanha os estados do pagamento, recebe notificações por e-mail e push no seu telemóvel quando pagamentos são bem sucedidos.
+**Pagamento Web2App** Caso os usuários estejam a navegar no smarphone eles não poderão escanear o código QR. Para efectuar o pagamento neste caso, o usuário poderá clicar no botão Pagar com Kamba para finalizar o pagamento com a carteira instalada em seu dispositivo móvel.
+
+> **Nota:** Você acompanha os estados do pagamento através do [painel comerciante](https://comerciante.usekamba.com/entrar), recebe notificações por e-mail e push no seu telemóvel quando pagamentos são bem sucedidos.
 
 ## Configuração
 
-Crie uma conta em https://comerciante.usekamba.com/criar-conta para obter o registro como comerciante e no menu do painel clique na opção `Integrações`. Copie a sua chave de API `api_key` e outras configurações necessárias para integrar o Checkout Js.
+Crie uma conta em https://comerciante.usekamba.com/criar-conta para obter as suas credenciais.
 
-Não há necessidade de clonar o repositório ou baixar arquivos para sua máquina – basta fazer uma chamada para a biblioteca javascript no cabeçalho da sua página Web `<head></head>`, e adicionar algumas linhas de código no corpo da sua página `<body></body>`. 
+Não há necessidade de clonar o repositório ou baixar arquivos para o seu computador – basta adicionar o script da biblioteca javascript no cabeçalho da sua página Web `<head></head>`, e adicionar algumas linhas de código no corpo da sua página `<body></body>`.
 
 Siga as instruções abaixo:
 
-**Passo 1:**
-## Página do comerciante
-Faça a chamada à biblioteca no cabeçalho da sua página Web ou no corpo da página antes das outras configurações javascript que poderão ser configuradas:
+### **1. Adicione o script:**
+
+Antes de tudo, você precisará incluir nossa biblioteca javaScript.
+
+Você deve adicionar o script na sua página de pagamento no cabeçalho como já informado acima `<head></head>`.
 
 ```html
-<head>       
+<head>
   <script src="https://comerciante.usekamba.com/checkout/0.0.1/kamba-web-sdk.js" charset="utf-8"></script>
 </head>
 ```
 
-**Passo 2:**
-Faça a inclusão do botão "Pagar com KAMBA" dentro do corpo da sua página Web em qualquer lugar onde desejar que o botão seja apresentado. 
+Em algum lugar no corpo da sua página, você deverá adicionar um botão que permite aos usuários efetuar um pagamento usando o Kamba. Quando o usuário clicar nesse botão, a biblioteca 'kamba-checkout-js' será chamada, e uma tela de checkout será aberta no navegador do usuário.
 
 ```html
 <body>
@@ -41,19 +44,18 @@ Faça a inclusão do botão "Pagar com KAMBA" dentro do corpo da sua página Web
 </body>
 ```
 
-**Passo 3:**
-Cole o código Javascrip abaixo dentro da tag html `<body></body>` no corpo da sua página Web, de preferência no final da página.
+**A seguir cole** o código Javascript abaixo dentro da tag html `<body></body>` no corpo da sua página Web, de preferência no final da página.
 
 ```html
 <body>
   <script type="text/javascript">
     function start_payment() {
       kamba(api_config = {
-      environment: 'sandbox',
+      environment: 'AMBIENTE_DA_API',
       api_key: 'SUA_CHAVE_DA_API',
       checkout_signature: 'ASSINATURA_DO_CHECKOUT'
 	},
-	checkout_config = { 
+	checkout_config = {
 	  channel: 'WEB',
 	  initial_amount: 10800,
 	  notes: 'Curso API Iniciantes',
@@ -63,36 +65,40 @@ Cole o código Javascrip abaixo dentro da tag html `<body></body>` no corpo da s
   </script>
 </body>
 ```
-**Configurações API `api_config`:**
-- O campo `environment` define qual ambiente poderá ser usado. Durante a fase de desenvolvimento deve-se usar o ambiente ```sandbox``` e quando estiver pronto 
-para produção deve-se usar ```production```.
-- Use a chave da API que copio no seu painel de comerciante para substituir o valor do campo `api_key`. Recomenda-se usar variáveis de ambiente sempre, e não deve ser compartilhada ou exposta em sua página html. 
-NOTE: A chave de API para sandbox e production são diferentes. 
-- Campo `checkout_signature` recebe o valor da assinatura do checkout que poderá ser gerada.
-	
-**Configurações Checkout `checkout_config`:**
-- Para o nosso propósito o valor do campo `channel`, permanecerá igual à **WEB** como no exemplo.
-- `initial_amount`, este campo recebe o preço do produto ou serviço a ser comercializado.
-- Substitua o valor do campo `notes` por uma anotação ou descrição geral a cerca do pagamento, e coloque o preço do mesmo no valor do campo `initial_amount`.
-- O campo `redirect_url_success` recebe o endereço da página na qual pretende-se ser redirecionada após o pagamento com sucesso.	
+**Configurações do `api_config`:**
 
+| Atributo        | Descrição         |
+| ------------- |:-------------:|
+| `environment`      | O campo `environment` define qual ambiente poderá ser usado. Durante a fase de desenvolvimento deve-se usar o ambiente ```sandbox``` e quando estiver pronto para produção deve-se usar ```production```.  |
+| `api_key`       | Use a chave da API que copiou do seu painel de comerciante para substituir o valor do campo `api_key`. Recomenda-se usar variáveis de ambiente sempre, e não deve ser compartilhada ou exposta em sua página html. **A chave de API para sandbox e production são diferentes e devem sempre ser adicionadas diretamente no backend do comerciante.**     |
+| `checkout_signature`        | Campo `checkout_signature` recebe o valor da assinatura do checkout gerada através de um algoritmo de mensagem-assinatura.        |
 
+**Configurações do `checkout_config`:**
+
+| Atributo        | Descrição         |
+| ------------- |:-------------:|
+| `channel`      | Para o nosso propósito o valor do campo `channel`, permanecerá igual à **WEB** como no exemplo. |
+|`initial_amount`|`initial_amount`, este campo recebe o preço do produto ou serviço a ser comercializado.|
+|`notes`|Substitua o valor do campo `notes` por uma anotação ou descrição geral a cerca do pagamento, e coloque o preço do mesmo no valor do campo `initial_amount`.|
+|`redirect_url_success`|O campo `redirect_url_success` recebe o endereço da página na qual pretende-se ser redirecionada após o pagamento com sucesso.|
 
  ## Geração de assinaturas
 
-Por questões de segurança no processo de integração com o `Checkout Js` é necessário gerar uma assinatura que poderá ser passada para preencher o valor do campo `checkout_signature`. Esta assinatura poderá ser gerada usando uma linguagem de programação *Server Side* (Php, Java, Python, Ruby...) utilizada na própria página que deseja-se integrar o Checkout Js.
+Para garantir a segurança do checkout e da transação, uma assinatura é gerada usando a chave secreta atribuída ao comerciante.
 
-> **Selecione uma Linguagem de Programação a baixo e veja como gerar a assinatura usando esta linguagem:**
+A chave secreta designada deve ser mantida em segurança, pois é usada para autenticar o checkout através da API da Kamba.
 
-| [Ruby](https://github.com/usekamba/kamba_generate_signature_ruby) | Php | Java |
-| ------ | ------ |------ |
+Implementações de amostra para diferentes linguagens de programação são fornecidas para gerar uma assinatura.
+
+> **Nota:** É altamente recomendável que a assinatura seja gerada no back-end da loja/comerciante e depois passada para a biblioteca `kamba-checkout-js` no frontend do site do comerciante. **Isso é para evitar que ocorra qualquer fraude.**
+
+Selecione uma linguagem de programação a baixo e siga as instruções de como gerar a assinatura:**
+
+|Linguagem| Biblioteca|
+| ------ | ------ |
+| **Ruby** | [kamba_signature_generation](https://github.com/usekamba/kamba_generate_signature_ruby) |
 
 
-## Recomendações
-
-> A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em https://docs.usekamba.com/#autenticacao.
-
-> Por questões de segurança, para não deixar que a sua chave de API `api_key` esteja ao alcance de qualquer pessoa que acesse a sua página Web, recomendamos que estabeleça a sua chave da API utilizando variáveis de ambiente. Podendo utilizar algo como `ENV['API_KEY']` no valor da chave da API e passar a verdadeira chave da API por meio de uma variável de ambiente.
 
 ---
-Nota: Você também pode criar uma issue para deixar o seu feedback ou enviar o seu feedback para suporte@usekamba.com. Nesta fase de implementação a sua opinião é extremamente importante.
+Crie uma issue para deixar o seu feedback ou envie o seu feedback para **suporte@usekamba.com**.
