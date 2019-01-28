@@ -107,10 +107,9 @@ ready(function() {
 
         //Send - Post request
         let url;
-        const token = 'Token ';
 
         if (api_config.environment == 'sandbox') {
-          url = 'https://sandbox.usekamba.com/v1/checkouts/';  
+          url = 'https://sandbox.usekamba.com/v1/checkouts/';
         } else {
           url = 'https://api.usekamba.com/v1/checkouts/';
         }
@@ -118,8 +117,8 @@ ready(function() {
         fetch(url, {method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'authorization': token.concat(api_config.api_key),
-            'signature': api_config.checkout_signature
+            'Merchant-ID': api_config.merchant_id,
+            'Signature': api_config.checkout_signature
           },
           body:  JSON.stringify({
             channel: checkout_config.channel,
@@ -162,7 +161,7 @@ ready(function() {
 
               let merchantId = data.merchant.id;
               let checkoutId = data.id;
-              
+
 
               //Template
               const kambaWidget = `
@@ -192,7 +191,7 @@ ready(function() {
                       <div class="nameProductKambaMerchant">${data.notes}</div>
 
                       <article class="qrPartKambaMerchant">
-                      
+
                         <div class="SvgKambaMerchant">
 
                             <svg viewBox="0 0 625 625" preserveAspectRatio="xMidYMid meet" class="imgQrKambaMerchant">
@@ -279,7 +278,7 @@ ready(function() {
                   margin-left: 0.5rem;
                 }
 
-                .descritionKambaMerchant {     
+                .descritionKambaMerchant {
                   font-size: 0.9rem;
                   font-weight: bolder;
                   color: rgb(105, 105, 105);
@@ -437,11 +436,11 @@ ready(function() {
                   }
 
                 }
-      
+
               </style>
               `
               kambaModalContainer.innerHTML = kambaWidget;
-              
+
               let btnCloseWidgetKamba = document.querySelector('.cancelKambaCheckout');
               btnCloseWidgetKamba.title = 'Sair do pagamento';
               btnCloseWidgetKamba.style.cursor = 'pointer';
@@ -455,7 +454,7 @@ ready(function() {
                 kambaModalContainer.style.display = 'flex';
               };
 
-  
+
             });
 
           } else {
