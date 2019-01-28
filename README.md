@@ -52,7 +52,7 @@ Em algum lugar no corpo da sua página, você deverá adicionar um botão que pe
     function start_payment() {
       kamba(api_config = {
       environment: 'AMBIENTE_DA_API',
-      merchant_id: 'SUA_CHAVE_DA_API',
+      merchant_id: 'SEU_ID_COMERCIANTE_DA_API',
       checkout_signature: 'ASSINATURA_DO_CHECKOUT'
 	},
 	checkout_config = {
@@ -70,7 +70,7 @@ Em algum lugar no corpo da sua página, você deverá adicionar um botão que pe
 | Atributo        | Descrição         |
 | ------------- |:-------------:|
 | `environment`      | O campo `environment` define qual ambiente poderá ser usado. Durante a fase de desenvolvimento deve-se usar o ambiente ```sandbox``` e quando estiver pronto para produção deve-se usar ```production```.  |
-| `merchant_id`       | Use o Merchant-ID que copiou do seu painel de comerciante para substituir o valor do campo `merchant_id`. Recomenda-se usar variáveis de ambiente sempre, e não deve ser compartilhada ou exposta em sua página html. **A chave de API para sandbox e production são diferentes e devem sempre ser adicionadas diretamente no backend do comerciante.**     |
+| `merchant_id`       | Use o `merchant_id` (ID de comerciante) que copiou do seu painel de comerciante para substituir o valor do campo `merchant_id`. Recomenda-se usar variáveis de ambiente sempre, e não deve ser compartilhada ou exposta em sua página html. **O ID de comerciante da API para sandbox e production são diferentes e devem sempre ser adicionados diretamente no backend do comerciante.**     |
 | `checkout_signature`        | Campo `checkout_signature` recebe o valor da assinatura do checkout gerada através de um algoritmo de mensagem-assinatura.        |
 
 **Configurações do `checkout_config`:**
