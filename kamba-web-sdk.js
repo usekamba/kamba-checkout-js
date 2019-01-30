@@ -6,25 +6,6 @@ function ready(fn) {
   }
 }
 
-//===================================================== Check if devise is mobile?
-function isMobileDevice() {
-  return (typeof window.orientation !== 'undefined') || (navigator.userAgent.indexOf('IEMobile') !== -1);
-};
-
-//===================================================== Get mobile operating system
-function getMobileOperatingSystem() {
-  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-  if (/android/i.test(userAgent)) {
-    return 'Android';
-  }
-
-  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    return 'iOS';
-  }
-  return 'unknown';
-}
-
 ready(function() {
   //Style for button Pay with Kamba - Merchant
   const btnOpenWidgetKamba = document.querySelector('.btnOpenWidgetKamba');
@@ -138,9 +119,20 @@ ready(function() {
               //To transform
               let initial_amount = new Number(data.initial_amount);
               let total_amount = new Number(data.total_amount);
+              
+              function formatDataExp(dataForm = new Date(data.expires_at)){
+                let day = dataForm.getDate();
+                let month = dataForm.getMonth()+1;
+                let year = dataForm.getFullYear();
+                let hours = dataForm.getHours(); 
+                let minute = dataForm.getMinutes();
 
-              let dateConvert = new Date(data.expires_at);
-              let newDateConvert = [dateConvert.getDate(), dateConvert.getMonth(), dateConvert.getFullYear()].join('/')+' às '+[dateConvert.getHours(), dateConvert.getMinutes()].join(':');
+                if (day.toString().length == 1) day = '0'+day;
+                if (month.toString().length == 1) month = '0'+month;
+
+                return [day, month, year].join('/')+' às '+[hours, minute].join(':');
+              }
+
 
               const mainKambaModalContainer = document.createElement('main');
               //Modal Container
@@ -199,7 +191,7 @@ ready(function() {
                             </svg>
 
                             <div class="textValidatKambaMerchant">
-                              Expira em ${newDateConvert}
+                              Expira em ${formatDataExp()}
                             </div>
                         </div>
 
