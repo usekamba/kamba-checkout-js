@@ -186,9 +186,13 @@ ready(function() {
 
                         <div class="SvgKambaMerchant">
 
-                            <svg viewBox="0 0 625 625" preserveAspectRatio="xMidYMid meet" class="imgQrKambaMerchant">
-                                ${data.qr_code}
-                            </svg>
+                        <svg width="186" height="185" viewBox="0 0 1 622"
+                        preserveAspectRatio="xMinYMin meet"
+                        style="border: 1px solid #cccccc; padding:0.4rem">
+                             ${data.qr_code}
+                        </svg>
+      
+                            
 
                             <div class="textValidatKambaMerchant">
                               Expira em ${formatDataExp()}
@@ -231,6 +235,11 @@ ready(function() {
                   fontSize: 0.85rem;
                   width: 100% !important;
                   height: 100% !important;
+                }
+
+                .qrImage {
+                  width: 15rem !important;
+                  height: 15rem !important;
                 }
 
                 .checkoutHeader {
@@ -322,7 +331,7 @@ ready(function() {
                 .optionHelpKamba1 {
                   text-align: center;
                   font-weight: bolder;
-                  margin-top: 2rem;
+                  margin-top: 1rem;
                   font-size: 0.8rem;
                   padding: 0 1rem;
                   text-align: center;
@@ -410,7 +419,7 @@ ready(function() {
                 @media only screen and (min-width: 40.063em) {
                   .kambaModalWidget {
                     width: 22rem !important;
-                    height: 34rem !important;
+                    height: 34.5rem !important;
                     border-radius: 0.5rem;
                     box-shadow: 0 5px 8px 0 rgba(0,0,0,.2), 0 7px 20px 0 rgba(0,0,0,.10);
                   }
